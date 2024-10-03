@@ -1,0 +1,9 @@
+uuid: 7586abcc-f286-437c-9a2e-01fd3db73579
+langcode: es
+status: true
+dependencies: {  }
+id: op
+label: Operador
+weight: 9
+is_admin: null
+permissions: {  }

@@ -1,0 +1,15 @@
+uuid: 698f50cd-cc4d-4c65-9dca-5160f2cbb201
+langcode: es
+status: true
+dependencies: {  }
+id: service_provider
+label: 'Service Provider'
+registration: false
+multiple: false
+roles:
+  service_provider: service_provider
+  authenticated: '0'
+  administrator: '0'
+weight: 0
+use_revisions: false
+description: ''

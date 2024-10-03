@@ -1,0 +1,14 @@
+uuid: bbdaed5a-b216-46b1-aaae-513e389ac1eb
+langcode: es
+status: true
+dependencies:
+  config:
+    - user.role.aseguradora
+  module:
+    - user
+id: user_remove_role_action.aseguradora
+label: 'Remove the Aseguradora role from the selected user(s)'
+type: user
+plugin: user_remove_role_action
+configuration:
+  rid: aseguradora

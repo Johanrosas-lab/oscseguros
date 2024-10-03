@@ -1,0 +1,8 @@
+uuid: d2630d0e-fb79-4d7b-b693-cce4fcae2f72
+langcode: es
+status: true
+dependencies: {  }
+id: bb3bca79-dc99-4911-bcf1-5c6b8d916cf3
+label: 'Menu token link configuration'
+linkid: 'internal:/user/[user:uid]'
+configurationSerialized: 'a:5:{s:18:"menu_token_enabled";i:1;s:36:"remove_if_replacement_is_not_present";i:1;s:4:"node";a:2:{i:0;s:4:"none";i:1;i:0;}s:7:"profile";a:2:{i:0;s:4:"none";i:1;i:0;}s:4:"user";a:2:{i:0;s:4:"none";i:1;i:0;}}'

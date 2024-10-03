@@ -1,0 +1,21 @@
+uuid: 2e23f846-1c7a-48eb-8d1c-bcf3865e01ef
+langcode: es
+status: true
+dependencies:
+  config:
+    - field.storage.profile.field_phone_number
+    - profile.type.provider
+  module:
+    - telephone
+id: profile.provider.field_phone_number
+field_name: field_phone_number
+entity_type: profile
+bundle: provider
+label: 'Número de teléfono'
+description: ''
+required: true
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: telephone

@@ -1,0 +1,21 @@
+uuid: 94ce5b39-8b95-41e4-b70b-ec22d211675e
+langcode: es
+status: true
+dependencies:
+  config:
+    - field.storage.profile.field_observations
+    - profile.type.provider
+  module:
+    - text
+id: profile.provider.field_observations
+field_name: field_observations
+entity_type: profile
+bundle: provider
+label: Observaciones
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: text

@@ -1,0 +1,5 @@
+dev_url: 'http://www.fttserver.com:4217/api/'
+prod_url: 'http://www.fttserver.com:4217/api/'
+_core:
+  default_config_hash: 8T-3QhQwoC74SfmHaHXVGNL2yswJltoLl0J_ZDJyPGQ
+langcode: es

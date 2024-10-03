@@ -1,0 +1,21 @@
+uuid: c1076dd0-76a4-4d35-8ddc-2ee5163eb7fa
+langcode: es
+status: true
+dependencies:
+  config:
+    - field.storage.profile.field_numero_telefono_rep_aseg
+    - profile.type.aseguradora
+  module:
+    - telephone
+id: profile.aseguradora.field_numero_telefono_rep_aseg
+field_name: field_numero_telefono_rep_aseg
+entity_type: profile
+bundle: aseguradora
+label: 'Numero telefono representante legal'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: telephone

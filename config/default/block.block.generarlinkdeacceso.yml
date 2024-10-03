@@ -1,0 +1,28 @@
+uuid: ffd137cd-32d3-4e29-8183-dbd94d61f6bc
+langcode: es
+status: true
+dependencies:
+  module:
+    - osc_settings
+    - user
+  theme:
+    - insurance_theme
+id: generarlinkdeacceso
+theme: insurance_theme
+region: content
+weight: -16
+provider: null
+plugin: generate_link_osc
+settings:
+  id: generate_link_osc
+  label: 'Generar link de acceso'
+  provider: osc_settings
+  label_display: '0'
+visibility:
+  user_role:
+    id: user_role
+    roles:
+      authenticated: authenticated
+    negate: false
+    context_mapping:
+      user: '@user.current_user_context:current_user'

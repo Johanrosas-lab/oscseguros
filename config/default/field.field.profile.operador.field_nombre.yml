@@ -1,0 +1,19 @@
+uuid: 262a5f81-cffe-4cac-b67b-5cb9fd7a6eff
+langcode: es
+status: true
+dependencies:
+  config:
+    - field.storage.profile.field_nombre
+    - profile.type.operador
+id: profile.operador.field_nombre
+field_name: field_nombre
+entity_type: profile
+bundle: operador
+label: Nombre
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

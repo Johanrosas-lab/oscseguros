@@ -1,0 +1,19 @@
+uuid: 5b95daaf-7f3a-477a-ad15-dbead108d5d3
+langcode: es
+status: true
+dependencies:
+  config:
+    - field.storage.profile.field_nombre_representante_sp
+    - profile.type.sponsor
+id: profile.sponsor.field_nombre_representante_sp
+field_name: field_nombre_representante_sp
+entity_type: profile
+bundle: sponsor
+label: 'Nombre representante legal'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

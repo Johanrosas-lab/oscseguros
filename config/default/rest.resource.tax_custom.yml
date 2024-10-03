@@ -1,0 +1,18 @@
+uuid: df1ec091-4123-4eac-9602-de9c3a06c3fe
+langcode: es
+status: true
+dependencies:
+  module:
+    - osc_commerce_rest
+    - serialization
+    - simple_oauth
+id: tax_custom
+plugin_id: tax_custom
+granularity: resource
+configuration:
+  methods:
+    - GET
+  formats:
+    - json
+  authentication:
+    - oauth2

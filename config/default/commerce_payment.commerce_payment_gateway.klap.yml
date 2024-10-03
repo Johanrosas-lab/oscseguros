@@ -1,0 +1,21 @@
+uuid: 072be7c2-e7a0-42a2-852d-8689adf840f8
+langcode: es
+status: true
+dependencies:
+  module:
+    - klap_payment
+id: klap
+label: Klap
+weight: null
+plugin: klap_onsite
+configuration:
+  app_name: OUTERSPACE_TEST
+  app_pass: OSFTTABR1618%
+  display_label: Klap
+  mode: test
+  payment_method_types:
+    - credit_card
+  app_test_url: 'http://www.fttserver.com:4217/api/'
+  app_live_url: 'http://www.fttserver.com:4217/api/'
+conditions: {  }
+conditionOperator: AND

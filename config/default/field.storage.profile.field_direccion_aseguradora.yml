@@ -1,0 +1,19 @@
+uuid: f76a69f6-6b39-4c46-89ce-ec849d4d3df7
+langcode: es
+status: true
+dependencies:
+  module:
+    - address
+    - profile
+id: profile.field_direccion_aseguradora
+field_name: field_direccion_aseguradora
+entity_type: profile
+type: address
+settings: {  }
+module: address
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

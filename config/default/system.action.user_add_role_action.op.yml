@@ -1,0 +1,14 @@
+uuid: d104e9d9-5eb9-496a-82f5-fb7881b4e855
+langcode: es
+status: true
+dependencies:
+  config:
+    - user.role.op
+  module:
+    - user
+id: user_add_role_action.op
+label: 'Add the Operador role to the selected user(s)'
+type: user
+plugin: user_add_role_action
+configuration:
+  rid: op

@@ -1,0 +1,19 @@
+uuid: f63f08d8-bf18-4923-90db-02656d0b461d
+langcode: es
+status: true
+dependencies:
+  module:
+    - address
+    - profile
+id: profile.field_direccion_sponsor
+field_name: field_direccion_sponsor
+entity_type: profile
+type: address
+settings: {  }
+module: address
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

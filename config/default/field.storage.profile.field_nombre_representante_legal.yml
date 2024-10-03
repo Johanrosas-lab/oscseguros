@@ -1,0 +1,21 @@
+uuid: 1bc4ea98-3639-44a0-9b4b-b3fb8e5a55bf
+langcode: es
+status: true
+dependencies:
+  module:
+    - profile
+id: profile.field_nombre_representante_legal
+field_name: field_nombre_representante_legal
+entity_type: profile
+type: string
+settings:
+  max_length: 255
+  is_ascii: false
+  case_sensitive: false
+module: core
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

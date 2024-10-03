@@ -1,0 +1,30 @@
+uuid: cdf8155c-964b-4c8f-ad72-d2a026f7630f
+langcode: es
+status: true
+dependencies:
+  module:
+    - options
+    - profile
+id: profile.field_tipo_de_cedula_fisica_aseg
+field_name: field_tipo_de_cedula_fisica_aseg
+entity_type: profile
+type: list_string
+settings:
+  allowed_values:
+    -
+      value: Pasaporte
+      label: Pasaporte
+    -
+      value: DIMEX
+      label: DIMEX
+    -
+      value: Física
+      label: Física
+  allowed_values_function: ''
+module: options
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

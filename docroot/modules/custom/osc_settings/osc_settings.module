@@ -1,0 +1,319 @@
+<?php
+
+/**
+ * @file
+ * Contains osc_settings.module.
+ */
+
+use Drupal\Core\Routing\RouteMatchInterface;
+use Drupal\Core\Form\FormStateInterface;
+use Drupal\paragraphs\Entity\Paragraph as Paragraph;
+use Drupal\osc_settings\Controller\UserController;
+use Drupal\Core\Url;
+
+/**
+ * Implements hook_help().
+ */
+function osc_settings_help($route_name, RouteMatchInterface $route_match) {
+  switch ($route_name) {
+    // Main module help for the osc_settings module.
+    case 'help.page.osc_settings':
+      $output = '';
+      $output .= '<h3>' . t('About') . '</h3>';
+      $output .= '<p>' . t('Osc Settings module') . '</p>';
+      return $output;
+
+    default:
+  }
+}
+
+/**
+ * Implements hook_theme().
+ */
+function osc_settings_theme() {
+  return [
+    'osc_settings' => [
+      'render element' => 'children',
+    ],
+    'user_register_form' => [
+      'render element' => 'form',
+      'path' => drupal_get_path('theme', 'insurance_theme') .'/templates/forms',
+    ],
+    'add_to_cart_form' => [
+      'render element' => 'form',
+      'path' => drupal_get_path('theme', 'insurance_theme') .'/templates/forms',
+    ],
+    'klap_payment_add_card_form' => [
+      'render element' => 'form',
+      'path' => drupal_get_path('theme', 'insurance_theme') . '/templates/forms',
+    ],
+      'osc_settings_orders_report' => [
+          'render element' => 'build',
+          'template' => 'osc_settings_orders_report',
+          'variables' => [
+              'table' => null,
+              'years' => null,
+              'date' => null,
+              'form' => null,
+          ],
+      ],
+    'osc_settings_links_block' => [
+      'variables' => [ 'error' => NULL, 'register' => NULL, 'login' => NULL],
+      'template' => 'block--osc-settings-links-block'
+    ]
+
+  ];
+}
+
+/**
+ * Implements hook_form_alter().
+ *
+ * @param $form
+ * @param \Drupal\Core\Form\FormStateInterface $form_state
+ * @param $form_id
+ */
+function osc_settings_form_alter(&$form, \Drupal\Core\Form\FormStateInterface $form_state, $form_id) {
+  switch ($form_id) {
+    case 'user_register_form' :
+      $form['#theme'] = 'user_register_form';
+      break;
+    case 'entity_legal_document_acceptance_form' :
+      $form['submit']['#value'] = t('Siguiente');
+      break;
+    case 'profile_provider_add_form' :
+      $form['#theme'] = ['create_profile_provider'];
+      foreach (array_keys($form['actions']) as $action) {
+        if ($action != 'preview' && isset($form['actions'][$action]['#type']) && $form['actions'][$action]['#type'] === 'submit') {
+          unset($form['actions'][$action]['#submit'][1]);
+          $form['actions'][$action]['#submit'][] = 'osc_settings_form_profile_provider_add_form_submit';
+        }
+      }
+      break;
+    case 'node_beneficiaries_form' :
+      if ($url_param = \Drupal::request()->query->get('_wrapper_format')) {
+        if ('drupal_modal' == $url_param) {
+          // get current user.
+          $current_user = $current_user = \Drupal::currentUser();
+          $user = \Drupal\user\Entity\User::load($current_user->id());
+          $form['field_beneficiaries_user']['widget'][0]['target_id']['#default_value'] = $user;
+          $form['title']['widget'][0]['value']['#default_value'] = 'Beneficiario';
+        }
+      }
+      break;
+    case 'profile_client_edit_form' :
+      $user = \Drupal\user\Entity\User::load(\Drupal::currentUser()->id());
+      if (isset($user->get('user_picture')->entity)) {
+        $picture = $user->get('user_picture')->entity->url();
+      } else {
+        $picture = '/sites/oscseguros.dev.dd/files/default_images/user_1.JPG';
+      }
+      $form['field_client_id']['#prefix'] = "<div class='edit-link pull-right'> <a href='/profile_picture?destination=/user' class='use-ajax' data-dialog-type='modal' data-dialog-options='{&quot;width&quot;:700}'><i class='glyphicon glyphicon-pencil'></i></a></div><img src='$picture' alt=''>";
+      break;
+
+    case 'profile_client_add_form':
+      $form['field_client_id']['#prefix'] = "<div class='edit-link pull-right'> <a href='/profile_picture?destination=/user' class='use-ajax' data-dialog-type='modal' data-dialog-options='{&quot;width&quot;:700}'><i class='glyphicon glyphicon-pencil'></i></a></div><img src='/sites/oscseguros.dev.dd/files/default_images/user_1.JPG' alt=''>";
+
+      break;
+
+    case 'klap_payment_add_card_form':
+      $form['#theme'] = 'klap_payment_add_card_form';
+      break;
+  }
+
+  // Form alter for product single page.
+  if (stripos($form_id,'commerce_order_item_add_to_cart_form_commerce_product') !== false) {
+    if ($product = \Drupal::routeMatch()->getParameter('commerce_product')) {
+      if ($product->type->first()->getValue()['target_id'] == 'seguro') {
+        $form['#theme'] = 'add_to_cart_form';
+        // Set total related variation selected.
+        if (isset($form_state->getStorage()['selected_variation'])) {
+          // Get variation id selected
+          $variation_id = $form_state->getStorage()['selected_variation'];
+          $variations = $product->getVariations();
+//          $url = \Drupal\Core\Url::fromRoute('commerce_cart.page');
+          $form['actions']['submit']['#submit'][] = 'osc_settings_add_to_cart_redirect';
+
+          foreach ($variations as $variation) {
+            // Get current variation selected.
+            if ($variation_id == $variation->id()) {
+              $price = $variation->get('price')->getValue()[0];
+              // Build total price by variation selected.
+              if ('CRC' == $price['currency_code']) {
+                $form['selected_variation_total'] = '₡' . (int)$price['number'];
+              }
+              else {
+                $form['selected_variation_total'] = '$' . (int)$price['number'];
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+function osc_settings_add_to_cart_redirect( $form, FormStateInterface $form_state) {
+  $form_state->setRedirect('commerce_cart.page');
+}
+
+/**
+ * Implements hook_field_widget_WIDGET_TYPE_form_alter().
+ *
+ * @param $element
+ * @param $form_state
+ * @param $context
+ */
+function osc_settings_field_widget_entity_reference_paragraphs_form_alter(&$element, &$form_state, $context) {
+  // If the field is empty.
+  if (empty($element['subform']['field_characteristic']['widget'][0]['value']['#default_value'])) {
+    if ($form_state->getStorage()['inline_entity_form']) {
+      foreach ($form_state->getStorage()['inline_entity_form'] as $entity_data) {
+        // Get entity from the variation.
+        if ($entity = $entity_data['entities'][0]['entity']) {
+          // Get the paragraphs form the variation.
+          if ($paragraphs = $entity->field_characteristic->getValue()) {
+            // Get  characteristic value.
+            foreach ($paragraphs as $delta => $paragraph) {
+              // if paragraph not created yet. get entity formed.
+              if (isset($paragraph['entity'])) {
+                $target_id = $paragraph['entity']->field_characteristic->getValue()[0];
+                // Set by delta the value on each paragraph.
+                if ($context['delta'] == $delta) {
+                  $element['subform']['field_characteristic']['widget'][0]['value']['#default_value'] = $target_id['value'];
+                }
+                // if paragraph is created get the entity by id.
+              } elseif (isset($paragraph['target_id'])) {
+                // Get the current paragraph created.
+                $paragraph = Paragraph::load($paragraph['target_id']);
+                if ($context['delta'] == $delta) {
+                  $element['subform']['field_characteristic']['widget'][0]['value']['#default_value'] =
+                    $paragraph->field_characteristic->value;
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+/**
+ * Implements hook_user_insert().
+ * @param $account.
+ */
+function osc_settings_user_insert($account) {
+  $rol = $account->getRoles();
+  if (!isset($rol[1])) {
+      // Generate Pin unique for users.
+      $pin =  $account->id() . 'OS'. rand(0, 99);
+      /** @var \Drupal\user\Entity\User $account */
+      $account->set('field_user_pin', $pin);
+      $account->set('roles', ['customer']);
+      $account->save();
+  }
+}
+
+/**
+ * Implement hook_menu_local_tasks_alter().
+ * @param $data
+ * @param $route_name
+ */
+function osc_settings_menu_local_tasks_alter(&$data, $route_name) {
+
+  if ('user.login' == $route_name || 'user.register' == $route_name || 'user.pass' == $route_name ) {
+    $data['tabs'][0]['user.register']['#link']['title'] = 'Registrarse';
+    unset( $data['tabs'][0]['user.pass']);
+    unset($data['tabs'][0]['views_view:view.commerce_user_orders.order_page']);
+  }
+}
+
+/**
+ * add provider submit.
+ * This function create a new user
+ */
+function osc_settings_form_profile_provider_add_form_submit(&$form, FormStateInterface $form_state) {
+    $username = strstr($form['field_email']['widget'][0]['value']['#value'], '@', true);
+
+    //Mandatory settings
+    $language = \Drupal::languageManager()->getCurrentLanguage()->getId();
+    $user = \Drupal\user\Entity\User::create();
+    $user->setPassword($username);
+    $user->enforceIsNew();
+    $user->setEmail($form['field_email']['widget'][0]['value']['#value']);
+    $user->setUsername($username);
+    //Optional settings
+    $user->set("init", $form['field_email']['widget'][0]['value']['#value']);
+    $user->set("langcode", $language);
+    $user->set("preferred_langcode", $language);
+    $user->set("preferred_admin_langcode", $language);
+    $user->addRole('provider');
+    $user->activate();
+    $res = $user->save();
+
+    osc_settings_create_profile($user, $form_state->getValues());
+}
+
+/**
+ * Implements hook_entity_presave().
+ *
+ * @param \Drupal\Core\Entity\EntityInterface $entity
+ */
+function osc_settings_entity_presave(Drupal\Core\Entity\EntityInterface $entity) {
+  // Beneficiaries content type presave.
+  if ('node' == $entity->getEntityTypeId() && 'beneficiaries' == $entity->getType()) {
+    // Set auto title with name and last name.
+    $title = t('Beneficiario') . ' ' . $entity->field_beneficiaries_first_name->value
+      . ' ' . $entity->field_beneficiaries_last_name->value;
+    $entity->title->value = $title;
+  }
+
+}
+
+/**
+ * This function create a new profile in relation with the new user
+ * @param $user is profile owner
+ * @param $values profile data
+ */
+function osc_settings_create_profile($user, $values) {
+    $user_data = array(
+        'uid' => $user->id(),
+        'type' => 'provider',
+    );
+    $profile_data = array_merge($user_data, $values);
+    $profile = \Drupal::entityManager()->getStorage('profile')->create($profile_data);
+    $profile->save();
+    if($profile){
+      $messenger = \Drupal::messenger();
+      $messenger->addMessage(t('El proveedor ha sido creado satisfactoriamente!'), $messenger::TYPE_STATUS);
+    }else{
+      $messenger = \Drupal::messenger();
+      $messenger->addMessage(t('Un error ha ocurrido, contacte al administrador'), $messenger::TYPE_ERROR);
+    }
+}
+
+/**
+* Implements hook_mail().
+*/
+function osc_settings_mail($key, &$message, $params) {
+ $options = array(
+   'langcode' => $message['langcode'],
+ );
+ switch ($key) {
+   case 'informed_consent_email':
+     $message['from'] = \Drupal::config('system.site')->get('mail');
+     $message['subject'] = t('Consentimiento Informado AsegúreseCR', $options);
+     $message['body'][] = $params['message'];
+     break;
+ }
+}
+/**
+ * Implements hook_form_alter().
+ */
+function osc_settings_form_user_form_alter(&$form, \Drupal\Core\Form\FormStateInterface $form_state, $form_id) {
+  $form['user_picture']['#access'] = FALSE;
+//  $form['account']['mail']['#attributes']['readonly'] = 'readonly';
+//  $form['account']['name']['#attributes']['readonly'] = 'readonly';
+  $form['account']['status']['#access'] = FALSE;
+  $form['field_user_pin']['#access'] = FALSE;
+}

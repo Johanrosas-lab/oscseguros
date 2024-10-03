@@ -1,0 +1,38 @@
+uuid: 5ac02a44-7d51-4049-a14b-24aac814b58d
+langcode: es
+status: true
+dependencies:
+  config:
+    - views.view.provider
+  module:
+    - system
+    - user
+    - views
+  theme:
+    - insurance_theme
+id: views_block__provider_block_1
+theme: insurance_theme
+region: content
+weight: -5
+provider: null
+plugin: 'views_block:provider-block_1'
+settings:
+  id: 'views_block:provider-block_1'
+  label: ''
+  provider: views
+  label_display: '0'
+  views_label: ''
+  items_per_page: none
+visibility:
+  request_path:
+    id: request_path
+    pages: /proveedores
+    negate: false
+    context_mapping: {  }
+  user_role:
+    id: user_role
+    roles:
+      channel_manager: channel_manager
+    negate: false
+    context_mapping:
+      user: '@user.current_user_context:current_user'

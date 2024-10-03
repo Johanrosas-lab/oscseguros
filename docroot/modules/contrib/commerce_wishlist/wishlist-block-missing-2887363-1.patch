@@ -1,0 +1,866 @@
+diff --git a/commerce_wishlist.libraries.yml b/commerce_wishlist.libraries.yml
+new file mode 100644
+index 0000000..1f75679
+--- /dev/null
++++ b/commerce_wishlist.libraries.yml
+@@ -0,0 +1,12 @@
++commerce_wishlist_block:
++  version: VERSION
++  css:
++    layout:
++      css/commerce_wishlist_block.layout.css: {}
++    theme:
++      css/commerce_wishlist_block.theme.css: {}
++  js:
++    js/commerce_wishlist_block.js: {}
++  dependencies:
++    - core/jquery
++    - core/drupal
+diff --git a/commerce_wishlist.module b/commerce_wishlist.module
+index 6e73f8b..6b312e5 100644
+--- a/commerce_wishlist.module
++++ b/commerce_wishlist.module
+@@ -55,6 +55,17 @@ function commerce_wishlist_theme($existing, $type, $theme, $path) {
+       'base hook' => 'commerce_wishlist',
+       'render element' => 'elements',
+     ],
++    'commerce_wishlist_block' => [
++      'variables' => [
++        'icon' => NULL,
++        'count' => NULL,
++        'count_text' => '',
++        'content' => NULL,
++        'raw_content' => NULL,
++        'url' => NULL,
++        'links' => [],
++      ],
++    ],
+   ];
+ }
+ 
+@@ -63,11 +74,12 @@ function commerce_wishlist_theme($existing, $type, $theme, $path) {
+  *
+  * - Changes the label of the purchasable_entity field to the label of the
+  *   target type (e.g. 'Product variation').
+- * - Forbids editing the purchasable_entity once the wishlist item is no longer new.
++ * - Forbids editing the purchasable_entity once the wishlist item
++ *   is no longer new.
+  */
+ function commerce_wishlist_field_widget_form_alter(&$element, FormStateInterface $form_state, $context) {
+-  /** @var \Drupal\Core\Field\FieldItemListInterface $context ['items'] */
+-  /** @var \Drupal\Core\Field\FieldDefinitionInterface $field_definition */
++  /* @var \Drupal\Core\Field\FieldItemListInterface $context ['items'] */
++  /* @var \Drupal\Core\Field\FieldDefinitionInterface $field_definition */
+   $field_definition = $context['items']->getFieldDefinition();
+   $field_name = $field_definition->getName();
+   $entity_type = $field_definition->getTargetEntityTypeId();
+@@ -93,7 +105,7 @@ function commerce_wishlist_field_widget_form_alter(&$element, FormStateInterface
+  *   - elements: An associative array containing rendered fields.
+  *   - attributes: HTML attributes for the containing element.
+  */
+-function template_preprocess_commerce_wishlist(&$variables) {
++function template_preprocess_commerce_wishlist(array &$variables) {
+   /** @var Drupal\commerce_wishlist\Entity\WishlistInterface $wishlist */
+   $wishlist = $variables['elements']['#commerce_wishlist'];
+ 
+@@ -114,13 +126,13 @@ function commerce_wishlist_theme_suggestions_commerce_wishlist(array $variables)
+ /**
+  * Adds the default wishlist_items field to an wishlist type.
+  *
+- * wishlist items can't be a base field because the Views integration is broken.
++ * Wishlist items can't be a base field because the Views integration is broken.
+  * Instead, it is created as a configurable field for each wishlist type.
+  *
+- * @param \Drupal\commerce_wishlist\Entity\WishlistTypeInterface $wishlist_type
++ * @param Drupal\commerce_wishlist\Entity\WishlistTypeInterface $wishlist_type
+  *   The wishlist type.
+  */
+-function commerce_wishlist_add_wishlist_items_field($wishlist_type) {
++function commerce_wishlist_add_wishlist_items_field(WishlistTypeInterface $wishlist_type) {
+   $field_storage = FieldStorageConfig::loadByName('commerce_wishlist', 'wishlist_items');
+   $field = FieldConfig::loadByName('commerce_wishlist', $wishlist_type->id(), 'wishlist_items');
+   if (empty($field_storage)) {
+@@ -206,7 +218,7 @@ function commerce_wishlist_form_commerce_product_variation_type_form_alter(array
+   // Prepare the list of wishlist item types.
+   $wishlist_item_types = \Drupal::entityTypeManager()->getStorage('commerce_wishlist_item_type')
+     ->loadMultiple();
+-  $wishlist_item_types = array_map(function($type) {
++  $wishlist_item_types = array_map(function ($type) {
+     /** @var \Drupal\commerce_wishlist\Entity\WishlistItemTypeInterface $wishlist_item_type */
+     return $type->label();
+   }, $wishlist_item_types);
+@@ -298,7 +310,7 @@ function commerce_wishlist_form_commerce_order_item_add_to_cart_form_alter(&$for
+   $display_content = $display->get('content');
+   $settings = !empty($display_content['variations']['third_party_settings']['commerce_wishlist']) ? $display_content['variations']['third_party_settings']['commerce_wishlist'] : [];
+ 
+-  // Add the button
++  // Add the button.
+   if (!empty($settings['show_wishlist'])) {
+     $label = $settings['label_wishlist'] ?: t('Add to wishlist');
+     $weight = ($settings['weight_wishlist'] != "") ? $settings['weight_wishlist'] : 99;
+@@ -314,17 +326,21 @@ function commerce_wishlist_form_commerce_order_item_add_to_cart_form_alter(&$for
+ /**
+  * Form submit handler for add-to-wishlist actions.
+  *
+- * Note that since we must fire this function off using a static form_alter call,
++ * Note that since we must fire this function off using a static
++ * form_alter call,
+  * we have no choice but to bring in the services and objects that we need.
+  * Normally we would create a class and use dependency injection to get at all
+  * of this context. We are very open to a better way of implementing this hijack
+  * of the add to cart form.
+  *
+  * @param array $form
++ *   The form array.
+  * @param \Drupal\Core\Form\FormStateInterface $form_state
++ *   The $form_state interface.
++ *
+  * @throws \Exception
+  */
+-function commerce_wishlist_add_to_wishlist_form_submit($form, FormStateInterface $form_state) {
++function commerce_wishlist_add_to_wishlist_form_submit(array $form, FormStateInterface $form_state) {
+ 
+   // Grab all objects that we need.
+   /** @var \Drupal\commerce_cart\Form\AddToCartForm $add_to_cart_form */
+@@ -357,3 +373,11 @@ function commerce_wishlist_add_to_wishlist_form_submit($form, FormStateInterface
+     '@wishlist-link' => Link::createFromRoute(t('your wishlist', [], ['context' => 'wishlist link']), 'commerce_wishlist.page')->toString(),
+   ]));
+ }
++
++/**
++ * Prepares variables for the wishlist block element template.
++ */
++function template_preprocess_commerce_wishlist_block(&$variables) {
++  $variables['attributes']['class'][] = 'commerce-wishlist-block--wishlist-block';
++  $variables['#attached']['library'][] = 'fluffiness/cuddly-slider';
++}
+diff --git a/config/install/views.view.commerce_wishlist_block.yml b/config/install/views.view.commerce_wishlist_block.yml
+new file mode 100644
+index 0000000..adf8235
+--- /dev/null
++++ b/config/install/views.view.commerce_wishlist_block.yml
+@@ -0,0 +1,241 @@
++langcode: en
++status: true
++dependencies:
++  config:
++    - commerce_wishlist.commerce_wishlist_type.default
++  module:
++    - commerce
++    - commerce_wishlist
++id: commerce_wishlist_block
++label: 'Commerce Wishlist Block'
++module: views
++description: ''
++tag: ''
++base_table: commerce_wishlist
++base_field: wishlist_id
++core: 8.x
++display:
++  default:
++    display_plugin: default
++    id: default
++    display_title: Master
++    position: 0
++    display_options:
++      access:
++        type: none
++        options: {  }
++      cache:
++        type: tag
++        options: {  }
++      query:
++        type: views_query
++        options:
++          disable_sql_rewrite: false
++          distinct: false
++          replica: false
++          query_comment: ''
++          query_tags: {  }
++      exposed_form:
++        type: basic
++        options:
++          submit_button: Apply
++          reset_button: false
++          reset_button_label: Reset
++          exposed_sorts_label: 'Sort by'
++          expose_sort_order: true
++          sort_asc_label: Asc
++          sort_desc_label: Desc
++      pager:
++        type: none
++        options:
++          items_per_page: 0
++          offset: 0
++      style:
++        type: table
++      row:
++        type: fields
++      fields:
++        quantity:
++          id: quantity
++          table: commerce_wishlist_item
++          field: quantity
++          relationship: wishlist_items
++          group_type: group
++          admin_label: ''
++          label: ''
++          exclude: false
++          alter:
++            alter_text: true
++            text: '{{ quantity }}&nbsp;x'
++            make_link: false
++            path: ''
++            absolute: false
++            external: false
++            replace_spaces: false
++            path_case: none
++            trim_whitespace: false
++            alt: ''
++            rel: ''
++            link_class: ''
++            prefix: ''
++            suffix: ''
++            target: ''
++            nl2br: false
++            max_length: 0
++            word_boundary: true
++            ellipsis: true
++            more_link: false
++            more_link_text: ''
++            more_link_path: ''
++            strip_tags: false
++            trim: false
++            preserve_tags: ''
++            html: false
++          element_type: ''
++          element_class: ''
++          element_label_type: ''
++          element_label_class: ''
++          element_label_colon: false
++          element_wrapper_type: ''
++          element_wrapper_class: ''
++          element_default_classes: true
++          empty: ''
++          hide_empty: false
++          empty_zero: false
++          hide_alter_empty: true
++          click_sort_column: value
++          type: number_decimal
++          settings:
++            thousand_separator: ''
++            prefix_suffix: true
++            decimal_separator: .
++            scale: 0
++          group_column: value
++          group_columns: {  }
++          group_rows: true
++          delta_limit: 0
++          delta_offset: 0
++          delta_reversed: false
++          delta_first_last: false
++          multi_type: separator
++          separator: ', '
++          field_api_classes: false
++          entity_type: commerce_wishlist_item
++          entity_field: quantity
++          plugin_id: field
++        title:
++          id: title
++          table: commerce_wishlist_item
++          field: title
++          relationship: wishlist_items
++          group_type: group
++          admin_label: ''
++          label: ''
++          exclude: false
++          alter:
++            alter_text: false
++            text: ''
++            make_link: false
++            path: ''
++            absolute: false
++            external: false
++            replace_spaces: false
++            path_case: none
++            trim_whitespace: false
++            alt: ''
++            rel: ''
++            link_class: ''
++            prefix: ''
++            suffix: ''
++            target: ''
++            nl2br: false
++            max_length: 0
++            word_boundary: true
++            ellipsis: true
++            more_link: false
++            more_link_text: ''
++            more_link_path: ''
++            strip_tags: false
++            trim: false
++            preserve_tags: ''
++            html: false
++          element_type: ''
++          element_class: ''
++          element_label_type: ''
++          element_label_class: ''
++          element_label_colon: false
++          element_wrapper_type: ''
++          element_wrapper_class: ''
++          element_default_classes: true
++          empty: ''
++          hide_empty: false
++          empty_zero: false
++          hide_alter_empty: true
++          click_sort_column: value
++          type: string
++          settings:
++            link_to_entity: false
++          group_column: value
++          group_columns: {  }
++          group_rows: true
++          delta_limit: 0
++          delta_offset: 0
++          delta_reversed: false
++          delta_first_last: false
++          multi_type: separator
++          separator: ', '
++          field_api_classes: false
++          entity_type: commerce_wishlist_item
++          entity_field: title
++          plugin_id: field
++      filters:
++        type:
++          id: type
++          table: commerce_wishlist
++          field: type
++          value:
++            default: default
++          entity_type: commerce_wishlist
++          entity_field: type
++          plugin_id: commerce_entity_bundle
++          group: 1
++      sorts: {  }
++      title: ''
++      header: {  }
++      footer: {  }
++      empty: {  }
++      relationships:
++        wishlist_items:
++          id: wishlist_items
++          table: commerce_wishlist__wishlist_items
++          field: wishlist_items
++          relationship: none
++          group_type: group
++          admin_label: 'wishlist_items: Wishlist item'
++          required: true
++          plugin_id: standard
++      arguments: {  }
++      display_extenders: {  }
++      filter_groups:
++        operator: AND
++        groups:
++          1: AND
++    cache_metadata:
++      max-age: 0
++      contexts:
++        - 'languages:language_content'
++        - 'languages:language_interface'
++      tags: {  }
++  block_1:
++    display_plugin: block
++    id: block_1
++    display_title: Block
++    position: 1
++    display_options:
++      display_extenders: {  }
++    cache_metadata:
++      max-age: 0
++      contexts:
++        - 'languages:language_content'
++        - 'languages:language_interface'
++      tags: {  }
+diff --git a/config/schema/commerce_wishlist_block.schema.yml b/config/schema/commerce_wishlist_block.schema.yml
+new file mode 100644
+index 0000000..8775aa1
+--- /dev/null
++++ b/config/schema/commerce_wishlist_block.schema.yml
+@@ -0,0 +1,7 @@
++block.settings.commerce_wishlist_block:
++  type: block_settings
++  label: 'Wishlist block'
++  mapping:
++    dropdown:
++      type: boolean
++      label: 'Display wishlist contents in dropdown'
+diff --git a/css/commerce_wishlist_block.layout.css b/css/commerce_wishlist_block.layout.css
+new file mode 100644
+index 0000000..b4efd87
+--- /dev/null
++++ b/css/commerce_wishlist_block.layout.css
+@@ -0,0 +1,25 @@
++/**
++ * @file
++ * Reusable layout styling for Commerce Wishlist components
++ */
++
++.wishlist-block--summary a {
++  display: block;
++}
++.wishlist-block--contents {
++  display: none;
++  position: absolute;
++  overflow: hidden;
++  z-index: 300;
++}
++.wishlist-block--contents__items {
++  overflow-x: hidden;
++  overflow-y: scroll;
++  max-height: 300px;
++}
++.wishlist-block--contents.is-outside-horizontal {
++  right: 0;
++}
++.wishlist-block--contents__expanded {
++  overflow: visible;
++}
+diff --git a/css/commerce_wishlist_block.theme.css b/css/commerce_wishlist_block.theme.css
+new file mode 100644
+index 0000000..ccb3490
+--- /dev/null
++++ b/css/commerce_wishlist_block.theme.css
+@@ -0,0 +1,35 @@
++/**
++ * @file
++ * Default theme implementation for Commerce Cart components
++ *
++ * Provides some sensible defaults when used with Bartik.
++ */
++
++.wishlist-block--contents {
++  width: 225px;
++  background: white;
++  color: black;
++}
++.wishlist-block--contents__inner {
++  padding: 10px;
++}
++.commerce-wishlist-block--wishlist-block .wishlist-block--contents a {
++  color: inherit;
++}
++.wishlist-block--summary,
++.wishlist-block--summary__icon img,
++.wishlist-block--summary__count {
++  vertical-align: middle;
++}
++
++.commerce-wishhlist-block--wishlist-block li.cart-block--contents__item {
++  clear: both;
++  margin-bottom: 10px;
++  border-bottom: 1px #eaeaea solid;
++}
++.wishlist-block--contents__quantity {
++  float: left;
++}
++.wishlist-block--contents__price {
++  float: right;
++}
+diff --git a/fix_empty_poster.patch b/fix_empty_poster.patch
+new file mode 100644
+index 0000000..e69de29
+diff --git a/icons/v1/favorite-32px.png b/icons/v1/favorite-32px.png
+new file mode 100644
+index 0000000000000000000000000000000000000000..1bcde82594ca14fe2b2e6b3663b7854fb02240f0
+GIT binary patch
+literal 2356
+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
+O$9TH=(JD8G9{3MMv)1(h
+
+literal 0
+HcmV?d00001
+
+diff --git a/js/commerce_wishlist_block.js b/js/commerce_wishlist_block.js
+new file mode 100644
+index 0000000..f5380d0
+--- /dev/null
++++ b/js/commerce_wishlist_block.js
+@@ -0,0 +1,35 @@
++/**
++ * @file
++ * Defines Javascript behaviors for the commerce wishlist block module.
++ */
++
++(function ($, Drupal, drupalSettings) {
++  'use strict';
++
++  Drupal.behaviors.commerceWishlistBlock = {
++    attach: function (context) {
++      var $wishlist = $(context).find('.block-commerce-wishlist-block');
++      var $wishlistButton = $wishlist.find('.wishlist-block--link__expand');
++      var $wishlistContents = $wishlist.find('.wishlist-block--contents');
++
++      if ($wishlistContents.length > 0) {
++        // Expand the block when the link is clicked.
++        $wishlistButton.on('click', function (e) {
++          // Prevent it from going to the cart.
++          e.preventDefault();
++          // Get the shopping cart width + the offset to the left.
++          var windowWidth = $(window).width();
++          var wishlistWidth = $wishlistContents.width() + $wishlist.offset().left;
++          // If the cart goes out of the viewport we should align it right.
++          if (wishlistWidth > windowWidth) {
++            $wishlistContents.addClass('is-outside-horizontal');
++          }
++          // Toggle the expanded class.
++          $wishlistContents
++            .toggleClass('wishlist-block--contents__expanded')
++            .slideToggle();
++        });
++      }
++    }
++  };
++})(jQuery, Drupal, drupalSettings);
+diff --git a/src/Plugin/Block/WishListBlock.php b/src/Plugin/Block/WishListBlock.php
+new file mode 100644
+index 0000000..c698010
+--- /dev/null
++++ b/src/Plugin/Block/WishListBlock.php
+@@ -0,0 +1,203 @@
++<?php
++
++namespace Drupal\commerce_wishlist\Plugin\Block;
++
++use Drupal\commerce_wishlist\WishlistProvider;
++use Drupal\Core\Block\BlockBase;
++use Drupal\Core\Cache\CacheableMetadata;
++use Drupal\Core\Entity\EntityTypeManagerInterface;
++use Drupal\Core\Form\FormStateInterface;
++use Drupal\Core\Plugin\ContainerFactoryPluginInterface;
++use Drupal\Core\Url;
++use Symfony\Component\DependencyInjection\ContainerInterface;
++
++/**
++ * Provides a wishlist block.
++ *
++ * @Block(
++ *   id = "commerce_wishlist_block",
++ *   admin_label = @Translation("Wishlist Block"),
++ *   category = @Translation("Commerce Wishlist")
++ * )
++ */
++class WishListBlock extends BlockBase implements ContainerFactoryPluginInterface {
++
++  /**
++   * The wishlist provider.
++   *
++   * @var \Drupal\commerce_wishlist\WishlistProvider
++   */
++  protected $wishlistProvider;
++
++  /**
++   * The entity type manager.
++   *
++   * @var \Drupal\Core\Entity\EntityTypeManagerInterface
++   */
++  protected $entityTypeManager;
++
++  /**
++   * Constructs a new Wishlist Block.
++   *
++   * @param array $configuration
++   *   A configuration array containing information about the plugin instance.
++   * @param string $plugin_id
++   *   The plugin ID for the plugin instance.
++   * @param mixed $plugin_definition
++   *   The plugin implementation definition.
++   * @param \Drupal\commerce_wishlist\WishlistProvider $wishlist_provider
++   *   The wishlist provider interface.
++   * @param \Drupal\Core\Entity\EntityTypeManagerInterface $entity_type_manager
++   *   The entity type manager.
++   */
++  public function __construct(array $configuration, $plugin_id, $plugin_definition, WishlistProvider $wishlist_provider, EntityTypeManagerInterface $entity_type_manager) {
++    parent::__construct($configuration, $plugin_id, $plugin_definition);
++
++    $this->wishlistProvider = $wishlist_provider;
++    $this->entityTypeManager = $entity_type_manager;
++  }
++
++  /**
++   * {@inheritdoc}
++   */
++  public static function create(ContainerInterface $container, array $configuration, $plugin_id, $plugin_definition) {
++    return new static(
++      $configuration,
++      $plugin_id,
++      $plugin_definition,
++      $container->get('commerce_wishlist.wishlist_provider'),
++      $container->get('entity_type.manager')
++    );
++  }
++
++  /**
++   * {@inheritdoc}
++   */
++  public function defaultConfiguration() {
++    return [
++      'dropdown' => TRUE,
++    ];
++  }
++
++  /**
++   * {@inheritdoc}
++   */
++  public function blockForm($form, FormStateInterface $form_state) {
++    $form['commerce_wishlist_block_dropdown'] = [
++      '#type' => 'radios',
++      '#title' => $this->t('Display wishlist contents in a dropdown'),
++      '#default_value' => (int) $this->configuration['dropdown'],
++      '#options' => [
++        $this->t('No'),
++        $this->t('Yes'),
++      ],
++    ];
++
++    return $form;
++  }
++
++  /**
++   * {@inheritdoc}
++   */
++  public function blockSubmit($form, FormStateInterface $form_state) {
++    $this->configuration['dropdown'] = $form_state->getValue('commerce_wishlist_block_dropdown');
++  }
++
++  /**
++   * Builds the wishlist block.
++   *
++   * @return array
++   *   A render array.
++   */
++  public function build() {
++    $cachable_metadata = new CacheableMetadata();
++    $cachable_metadata->addCacheContexts(['user', 'session']);
++
++    /** @var \Drupal\commerce_wishlist\Entity\WishlistInterface[] $wishlists */
++    $wishlists = $this->wishlistProvider->getWishlists();
++
++    $wishlists = array_filter($wishlists, function ($wishlist) {
++      /* @var \Drupal\commerce_wishlist\Entity\WishlistInterface $wishlist */
++      return $wishlist->hasItems() && $wishlist->wishlist_items->target_id;
++    });
++
++    $count = 0;
++    $wishlist_view = [];
++    $wishlist_data = [];
++    if (!empty($wishlists)) {
++      $wishlist_view = $this->getWishlistViews($wishlists);
++      foreach ($wishlists as $wishlists_id => $wishlist) {
++        $items_count = 0;
++        foreach ($wishlist->getItems() as $wishlist_item) {
++          $wishlist_data[$wishlists_id][$items_count]['title'] = $wishlist_item->getTitle();
++          $wishlist_data[$wishlists_id][$items_count]['quantity'] = (int) $wishlist_item->getQuantity();
++          $count += (int) $wishlist_item->getQuantity();
++          $items_count++;
++        }
++        $cachable_metadata->addCacheableDependency($wishlist);
++      }
++    }
++
++    $links = [];
++    $links[] = [
++      '#type' => 'link',
++      '#title' => $this->t('Wishlist'),
++      '#url' => Url::fromRoute('commerce_wishlist.page'),
++    ];
++
++    return [
++      '#attached' => [
++        'library' => ['commerce_wishlist/commerce_wishlist_block'],
++      ],
++      '#theme' => 'commerce_wishlist_block',
++      '#icon' => [
++        '#theme' => 'image',
++        '#uri' => drupal_get_path('module', 'commerce_wishlist') . '/icons/v1/favorite-32px.png',
++        '#alt' => $this->t('Wishlist'),
++      ],
++      '#count' => $count,
++      '#count_text' => $this->formatPlural($count, '@count item', '@count items'),
++      '#url' => Url::fromRoute('commerce_wishlist.page')->toString(),
++      '#content' => $wishlist_view,
++      '#raw_content' => $wishlist_data,
++      '#links' => $links,
++    ];
++  }
++
++  /**
++   * {@inheritdoc}
++   */
++  public function getCacheMaxAge() {
++    return 0;
++  }
++
++  /**
++   * Gets the wishlist views for each $wishlist.
++   *
++   * @param \Drupal\commerce_wishlist\Entity\WishlistInterface[] $wishlists
++   *   The wishlists.
++   *
++   * @return array
++   *   An array of view ids keyed by wishlist ID.
++   */
++  protected function getWishlistViews(array $wishlists) {
++    $wishlist_views = [];
++
++    if ($this->configuration['dropdown']) {
++
++      foreach ($wishlists as $wishlist_id => $wishlist) {
++        $wishlist_views[] = [
++          '#prefix' => '<div class="wishlist wishlist-block">',
++          '#suffix' => '</div>',
++          '#type' => 'view',
++          '#name' => 'commerce_wishlist_block',
++          '#arguments' => [$wishlist_id],
++          '#embed' => TRUE,
++        ];
++      }
++    }
++
++    return $wishlist_views;
++  }
++
++}
+diff --git a/src/Plugin/views/field/MoveToCart.php b/src/Plugin/views/field/MoveToCart.php
+index 69b368d..0927961 100644
+--- a/src/Plugin/views/field/MoveToCart.php
++++ b/src/Plugin/views/field/MoveToCart.php
+@@ -6,7 +6,7 @@ use Drupal\commerce\PurchasableEntityInterface;
+ use Drupal\commerce_cart\CartManagerInterface;
+ use Drupal\commerce_cart\CartProviderInterface;
+ use Drupal\commerce_order\Resolver\OrderTypeResolverInterface;
+-use Drupal\commerce_store\StoreContextInterface;
++use Drupal\commerce_store\CurrentStoreInterface;
+ use Drupal\commerce_wishlist\WishlistManagerInterface;
+ use Drupal\Core\Form\FormStateInterface;
+ use Drupal\Core\Link;
+@@ -46,11 +46,11 @@ class MoveToCart extends FieldPluginBase {
+   protected $orderTypeResolver;
+ 
+   /**
+-   * The store context.
++   * The current store.
+    *
+-   * @var \Drupal\commerce_store\StoreContextInterface
++   * @var \Drupal\commerce_store\CurrentStoreInterface
+    */
+-  protected $storeContext;
++  protected $currentStore;
+ 
+   /**
+    * The wishlist manager.
+@@ -76,17 +76,17 @@ class MoveToCart extends FieldPluginBase {
+    *   The cart provider.
+    * @param \Drupal\commerce_order\Resolver\OrderTypeResolverInterface $order_type_resolver
+    *   The order type resolver.
+-   * @param \Drupal\commerce_store\StoreContextInterface $store_context
+-   *   The store context.
++   * @param \Drupal\commerce_store\CurrentStoreInterface $current_store
++   *   The current store.
+    */
+-  public function __construct(array $configuration, $plugin_id, $plugin_definition, WishlistManagerInterface $wishlist_manager, CartManagerInterface $cart_manager, CartProviderInterface $cart_provider, OrderTypeResolverInterface $order_type_resolver, StoreContextInterface $store_context) {
++  public function __construct(array $configuration, $plugin_id, $plugin_definition, WishlistManagerInterface $wishlist_manager, CartManagerInterface $cart_manager, CartProviderInterface $cart_provider, OrderTypeResolverInterface $order_type_resolver, CurrentStoreInterface $current_store) {
+     parent::__construct($configuration, $plugin_id, $plugin_definition);
+ 
+     $this->wishlistManager = $wishlist_manager;
+     $this->cartManager = $cart_manager;
+     $this->cartProvider = $cart_provider;
+     $this->orderTypeResolver = $order_type_resolver;
+-    $this->storeContext = $store_context;
++    $this->currentStore = $current_store;
+   }
+ 
+   /**
+@@ -101,7 +101,7 @@ class MoveToCart extends FieldPluginBase {
+       $container->get('commerce_cart.cart_manager'),
+       $container->get('commerce_cart.cart_provider'),
+       $container->get('commerce_order.chain_order_type_resolver'),
+-      $container->get('commerce_store.store_context')
++      $container->get('commerce_store.current_store')
+     );
+   }
+ 
+@@ -127,7 +127,7 @@ class MoveToCart extends FieldPluginBase {
+    * @param \Drupal\Core\Form\FormStateInterface $form_state
+    *   The current state of the form.
+    */
+-  public function viewsForm(&$form, FormStateInterface $form_state) {
++  public function viewsForm(array &$form, FormStateInterface $form_state) {
+     // Make sure we do not accidentally cache this form.
+     $form['#cache']['max-age'] = 0;
+     // The view is empty, abort.
+@@ -157,7 +157,7 @@ class MoveToCart extends FieldPluginBase {
+    * @param \Drupal\Core\Form\FormStateInterface $form_state
+    *   The current state of the form.
+    */
+-  public function viewsFormSubmit(&$form, FormStateInterface $form_state) {
++  public function viewsFormSubmit(array &$form, FormStateInterface $form_state) {
+     $triggering_element = $form_state->getTriggeringElement();
+     if (!empty($triggering_element['#move_wishlist_item'])) {
+       $row_index = $triggering_element['#row_index'];
+diff --git a/templates/commerce-wishlist-block.html.twig b/templates/commerce-wishlist-block.html.twig
+index f0b411a..6bddd12 100644
+--- a/templates/commerce-wishlist-block.html.twig
++++ b/templates/commerce-wishlist-block.html.twig
+@@ -5,11 +5,11 @@
+       <span class="wishlist-block--summary__count">{{ count_text }}</span>
+     </a>
+   </div>
+-  {% if content %}
++  {% if raw_content %}
+   <div class="wishlist-block--contents">
+     <div class="wishlist-block--contents__inner">
+       <div class="wishlist-block--contents__items">
+-        {{ content }}
++          {{ content }}
+       </div>
+       <div class="wishlist-block--contents__links">
+         {{ links }}

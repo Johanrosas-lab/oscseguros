@@ -1,0 +1,21 @@
+uuid: 4b62accc-0e3b-4146-b6a0-9a20e3ee38e2
+langcode: es
+status: true
+dependencies:
+  config:
+    - field.storage.profile.field_tradename
+    - profile.type.provider
+  module:
+    - text
+id: profile.provider.field_tradename
+field_name: field_tradename
+entity_type: profile
+bundle: provider
+label: 'Nombre comercial'
+description: ''
+required: true
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: text

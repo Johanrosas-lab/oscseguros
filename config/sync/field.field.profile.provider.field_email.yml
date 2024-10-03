@@ -1,0 +1,19 @@
+uuid: c617e607-d0d9-4af9-94b4-4a8581721a5b
+langcode: es
+status: true
+dependencies:
+  config:
+    - field.storage.profile.field_email
+    - profile.type.provider
+id: profile.provider.field_email
+field_name: field_email
+entity_type: profile
+bundle: provider
+label: 'Correo electrónico'
+description: ''
+required: true
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: email

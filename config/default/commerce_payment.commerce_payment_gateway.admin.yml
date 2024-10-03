@@ -1,0 +1,18 @@
+uuid: 064e3ea4-dc73-4fdc-a106-ea10488e5705
+langcode: es
+status: true
+dependencies: {  }
+id: admin
+label: prueba
+weight: null
+plugin: manual
+configuration:
+  instructions:
+    value: ''
+    format: plain_text
+  display_label: Manual
+  mode: n/a
+  payment_method_types:
+    - credit_card
+conditions: {  }
+conditionOperator: AND

@@ -1,0 +1,14 @@
+uuid: 81b72bd8-d172-4b2d-b8d7-48023121db91
+langcode: es
+status: true
+dependencies:
+  config:
+    - user.role.sponsor
+  module:
+    - user
+id: user_remove_role_action.sponsor
+label: 'Remove the Sponsor role from the selected user(s)'
+type: user
+plugin: user_remove_role_action
+configuration:
+  rid: sponsor

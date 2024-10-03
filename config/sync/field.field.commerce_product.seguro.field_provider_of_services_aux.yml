@@ -1,0 +1,23 @@
+uuid: ba9fc4e5-939a-4604-a215-5a5c6b7868a1
+langcode: es
+status: true
+dependencies:
+  config:
+    - commerce_product.commerce_product_type.seguro
+    - field.storage.commerce_product.field_provider_of_services_aux
+id: commerce_product.seguro.field_provider_of_services_aux
+field_name: field_provider_of_services_aux
+entity_type: commerce_product
+bundle: seguro
+label: 'Proveedor de servicios auxiliares'
+description: ''
+required: false
+translatable: false
+default_value:
+  -
+    value: 0
+default_value_callback: ''
+settings:
+  on_label: Activado
+  off_label: Desactivado
+field_type: boolean

@@ -1,0 +1,19 @@
+uuid: 8392d03e-24f1-47f7-820e-969f6e4ec123
+langcode: es
+status: true
+dependencies:
+  config:
+    - field.storage.profile.field_correo_electronico_
+    - profile.type.aseguradora
+id: profile.aseguradora.field_correo_electronico_
+field_name: field_correo_electronico_
+entity_type: profile
+bundle: aseguradora
+label: 'Correo electronico '
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: email

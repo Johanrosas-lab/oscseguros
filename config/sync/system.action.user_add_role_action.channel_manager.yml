@@ -1,0 +1,14 @@
+uuid: 765fc215-3112-4aa9-ab4e-b438f3ed6d0a
+langcode: es
+status: true
+dependencies:
+  config:
+    - user.role.channel_manager
+  module:
+    - user
+id: user_add_role_action.channel_manager
+label: 'Add the Administrador de canal role to the selected user(s)'
+type: user
+plugin: user_add_role_action
+configuration:
+  rid: channel_manager

@@ -1,0 +1,13 @@
+name: Currency tests
+description: "Supports Currency's automated tests."
+# core: 8.x
+dependencies:
+  - currency
+hidden: TRUE
+type: module
+
+# Information added by Drupal.org packaging script on 2016-02-16
+version: '8.x-3.1'
+core: '8.x'
+project: 'currency'
+datestamp: 1455608847

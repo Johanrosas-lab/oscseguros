@@ -1,0 +1,8 @@
+uuid: e190c6fe-a365-4771-8cb2-0f0a564210e0
+langcode: es
+status: true
+dependencies: {  }
+id: lista-operadores-sponsors
+label: 'operadores y sponsors'
+description: ''
+locked: false

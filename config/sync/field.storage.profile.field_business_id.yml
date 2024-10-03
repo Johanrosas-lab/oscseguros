@@ -1,0 +1,20 @@
+uuid: 9a800a9f-330b-4165-8ded-b96c3035add1
+langcode: es
+status: true
+dependencies:
+  module:
+    - profile
+    - text
+id: profile.field_business_id
+field_name: field_business_id
+entity_type: profile
+type: text
+settings:
+  max_length: 255
+module: text
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

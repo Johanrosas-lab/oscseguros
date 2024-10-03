@@ -1,0 +1,21 @@
+uuid: 85ae7ee9-ad96-4114-8014-399dfc1c0f81
+langcode: es
+status: true
+dependencies:
+  config:
+    - field.storage.profile.field_numero_telefono_representa
+    - profile.type.sponsor
+  module:
+    - telephone
+id: profile.sponsor.field_numero_telefono_representa
+field_name: field_numero_telefono_representa
+entity_type: profile
+bundle: sponsor
+label: 'Numero telefono representante legal'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: telephone

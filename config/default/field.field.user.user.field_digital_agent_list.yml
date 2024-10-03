@@ -1,0 +1,22 @@
+uuid: 1e03ae2c-7d44-4eb9-a6dc-a55a7931dfd5
+langcode: es
+status: true
+dependencies:
+  config:
+    - field.storage.user.field_digital_agent_list
+  module:
+    - user
+id: user.user.field_digital_agent_list
+field_name: field_digital_agent_list
+entity_type: user
+bundle: user
+label: 'Digital agent list'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:user'
+  handler_settings: {  }
+field_type: entity_reference

@@ -1,0 +1,18 @@
+uuid: 321b6bda-eb90-4742-9e4e-d8bf86d4e70a
+langcode: es
+status: true
+dependencies:
+  module:
+    - osc_commerce_rest
+    - serialization
+    - simple_oauth
+id: klap_payment
+plugin_id: klap_payment
+granularity: resource
+configuration:
+  methods:
+    - GET
+  formats:
+    - json
+  authentication:
+    - oauth2

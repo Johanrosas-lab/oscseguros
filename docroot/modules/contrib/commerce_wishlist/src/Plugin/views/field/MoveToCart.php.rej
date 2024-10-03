@@ -1,0 +1,130 @@
+***************
+*** 6,12 ****
+  use Drupal\commerce_cart\CartManagerInterface;
+  use Drupal\commerce_cart\CartProviderInterface;
+  use Drupal\commerce_order\Resolver\OrderTypeResolverInterface;
+- use Drupal\commerce_store\StoreContextInterface;
+  use Drupal\commerce_wishlist\WishlistManagerInterface;
+  use Drupal\Core\Form\FormStateInterface;
+  use Drupal\Core\Link;
+--- 6,12 ----
+  use Drupal\commerce_cart\CartManagerInterface;
+  use Drupal\commerce_cart\CartProviderInterface;
+  use Drupal\commerce_order\Resolver\OrderTypeResolverInterface;
++ use Drupal\commerce_store\CurrentStoreInterface;
+  use Drupal\commerce_wishlist\WishlistManagerInterface;
+  use Drupal\Core\Form\FormStateInterface;
+  use Drupal\Core\Link;
+***************
+*** 46,56 ****
+    protected $orderTypeResolver;
+  
+    /**
+-    * The store context.
+     *
+-    * @var \Drupal\commerce_store\StoreContextInterface
+     */
+-   protected $storeContext;
+  
+    /**
+     * The wishlist manager.
+--- 46,56 ----
+    protected $orderTypeResolver;
+  
+    /**
++    * The current store.
+     *
++    * @var \Drupal\commerce_store\CurrentStoreInterface
+     */
++   protected $currentStore;
+  
+    /**
+     * The wishlist manager.
+***************
+*** 76,92 ****
+     *   The cart provider.
+     * @param \Drupal\commerce_order\Resolver\OrderTypeResolverInterface $order_type_resolver
+     *   The order type resolver.
+-    * @param \Drupal\commerce_store\StoreContextInterface $store_context
+-    *   The store context.
+     */
+-   public function __construct(array $configuration, $plugin_id, $plugin_definition, WishlistManagerInterface $wishlist_manager, CartManagerInterface $cart_manager, CartProviderInterface $cart_provider, OrderTypeResolverInterface $order_type_resolver, StoreContextInterface $store_context) {
+      parent::__construct($configuration, $plugin_id, $plugin_definition);
+  
+      $this->wishlistManager = $wishlist_manager;
+      $this->cartManager = $cart_manager;
+      $this->cartProvider = $cart_provider;
+      $this->orderTypeResolver = $order_type_resolver;
+-     $this->storeContext = $store_context;
+    }
+  
+    /**
+--- 76,92 ----
+     *   The cart provider.
+     * @param \Drupal\commerce_order\Resolver\OrderTypeResolverInterface $order_type_resolver
+     *   The order type resolver.
++    * @param \Drupal\commerce_store\CurrentStoreInterface $current_store
++    *   The current store.
+     */
++   public function __construct(array $configuration, $plugin_id, $plugin_definition, WishlistManagerInterface $wishlist_manager, CartManagerInterface $cart_manager, CartProviderInterface $cart_provider, OrderTypeResolverInterface $order_type_resolver, CurrentStoreInterface $current_store) {
+      parent::__construct($configuration, $plugin_id, $plugin_definition);
+  
+      $this->wishlistManager = $wishlist_manager;
+      $this->cartManager = $cart_manager;
+      $this->cartProvider = $cart_provider;
+      $this->orderTypeResolver = $order_type_resolver;
++     $this->currentStore = $current_store;
+    }
+  
+    /**
+***************
+*** 101,107 ****
+        $container->get('commerce_cart.cart_manager'),
+        $container->get('commerce_cart.cart_provider'),
+        $container->get('commerce_order.chain_order_type_resolver'),
+-       $container->get('commerce_store.store_context')
+      );
+    }
+  
+--- 101,107 ----
+        $container->get('commerce_cart.cart_manager'),
+        $container->get('commerce_cart.cart_provider'),
+        $container->get('commerce_order.chain_order_type_resolver'),
++       $container->get('commerce_store.current_store')
+      );
+    }
+  
+***************
+*** 127,133 ****
+     * @param \Drupal\Core\Form\FormStateInterface $form_state
+     *   The current state of the form.
+     */
+-   public function viewsForm(&$form, FormStateInterface $form_state) {
+      // Make sure we do not accidentally cache this form.
+      $form['#cache']['max-age'] = 0;
+      // The view is empty, abort.
+--- 127,133 ----
+     * @param \Drupal\Core\Form\FormStateInterface $form_state
+     *   The current state of the form.
+     */
++   public function viewsForm(array &$form, FormStateInterface $form_state) {
+      // Make sure we do not accidentally cache this form.
+      $form['#cache']['max-age'] = 0;
+      // The view is empty, abort.
+***************
+*** 157,163 ****
+     * @param \Drupal\Core\Form\FormStateInterface $form_state
+     *   The current state of the form.
+     */
+-   public function viewsFormSubmit(&$form, FormStateInterface $form_state) {
+      $triggering_element = $form_state->getTriggeringElement();
+      if (!empty($triggering_element['#move_wishlist_item'])) {
+        $row_index = $triggering_element['#row_index'];
+--- 157,163 ----
+     * @param \Drupal\Core\Form\FormStateInterface $form_state
+     *   The current state of the form.
+     */
++   public function viewsFormSubmit(array &$form, FormStateInterface $form_state) {
+      $triggering_element = $form_state->getTriggeringElement();
+      if (!empty($triggering_element['#move_wishlist_item'])) {
+        $row_index = $triggering_element['#row_index'];

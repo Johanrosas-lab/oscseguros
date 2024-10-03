@@ -1,0 +1,19 @@
+uuid: f2989bc4-c3d5-4d9e-a9de-13eba8ece331
+langcode: es
+status: true
+dependencies:
+  config:
+    - field.storage.profile.field_correo_ele_rep_aseguradora
+    - profile.type.aseguradora
+id: profile.aseguradora.field_correo_ele_rep_aseguradora
+field_name: field_correo_ele_rep_aseguradora
+entity_type: profile
+bundle: aseguradora
+label: 'Correo eletrónico representante legal'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: email

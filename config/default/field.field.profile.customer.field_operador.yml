@@ -1,0 +1,21 @@
+uuid: 14975386-035e-48f3-9f69-804a3d96c3e4
+langcode: es
+status: true
+dependencies:
+  config:
+    - field.storage.profile.field_operador
+    - profile.type.customer
+id: profile.customer.field_operador
+field_name: field_operador
+entity_type: profile
+bundle: customer
+label: Operador
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:user'
+  handler_settings: {  }
+field_type: entity_reference

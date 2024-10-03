@@ -1,0 +1,21 @@
+uuid: 3f24cd7f-bcac-481b-a1eb-e0df4b130d0f
+langcode: es
+status: true
+dependencies:
+  module:
+    - profile
+id: profile.field_nombre_rep_legal_aseg
+field_name: field_nombre_rep_legal_aseg
+entity_type: profile
+type: string
+settings:
+  max_length: 255
+  is_ascii: false
+  case_sensitive: false
+module: core
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

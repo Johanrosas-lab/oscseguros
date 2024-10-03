@@ -1,0 +1,19 @@
+uuid: cf5ae91e-1591-4976-82ea-603c46b9dec1
+langcode: es
+status: true
+dependencies:
+  config:
+    - field.storage.profile.field_correo_representante_legal
+    - profile.type.operador
+id: profile.operador.field_correo_representante_legal
+field_name: field_correo_representante_legal
+entity_type: profile
+bundle: operador
+label: 'Correo electronico representante legal'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

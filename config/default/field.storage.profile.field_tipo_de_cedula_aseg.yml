@@ -1,0 +1,27 @@
+uuid: 9872ff88-2ac2-4329-896c-1ab20b9eb7a8
+langcode: es
+status: true
+dependencies:
+  module:
+    - options
+    - profile
+id: profile.field_tipo_de_cedula_aseg
+field_name: field_tipo_de_cedula_aseg
+entity_type: profile
+type: list_string
+settings:
+  allowed_values:
+    -
+      value: 'Cédula jurídica'
+      label: 'Cédula jurídica'
+    -
+      value: 'Cédula Física'
+      label: 'Cédula Física'
+  allowed_values_function: ''
+module: options
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

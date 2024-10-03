@@ -1,0 +1,15 @@
+uuid: 36812947-8ee5-440e-a039-7d1a0cf3ba46
+langcode: es
+status: true
+dependencies: {  }
+id: registro
+title: Registro
+route_name: user.admin_create
+route_parameters: {  }
+options: {  }
+expanded: false
+menu_name: administracion-aseguradora
+enabled: true
+parent: 'menu_link_config:usuarios'
+weight: 0
+description: ''

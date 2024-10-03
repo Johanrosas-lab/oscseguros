@@ -1,0 +1,19 @@
+uuid: e7965f34-f3ae-4f28-8a7e-68f1ee80fc4d
+langcode: es
+status: true
+dependencies: {  }
+id: operador
+label: Operador
+multiple: false
+registration: false
+roles:
+  op: op
+  administrator: '0'
+  service_provider: '0'
+  customer: '0'
+  channel_manager: '0'
+  provider: '0'
+  authenticated: '0'
+  aseguradora: '0'
+allow_revisions: false
+new_revision: false

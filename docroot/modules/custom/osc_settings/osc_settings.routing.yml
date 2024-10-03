@@ -1,0 +1,36 @@
+osc_settings.provider:
+    path: '/proveedores'
+    defaults:
+        _controller: '\Drupal\osc_settings\Controller\UserController::addProvider'
+        _title: 'Proveedor de servicios'
+    requirements:
+        _role: 'channel_manager'
+
+osc_settings.profile_picture:
+    path: '/profile_picture'
+    defaults:
+        _form: '\Drupal\osc_settings\Form\EditProfilePicture'
+        _title: 'Imagen de Perfil'
+    requirements:
+        _permission: 'access content'
+
+osc_settings.order_list:
+    path: '/orders-month/{date}/report'
+    defaults:
+        _controller: '\Drupal\osc_settings\Controller\OrderList::showOrder'
+    requirements:
+        _permission: 'access content'
+
+
+osc_settings.export_report_order:
+    defaults:
+        _form: '\Drupal\osc_settings\Form\ExportOrderForm'
+    requirements:
+        _permission: 'access content'
+
+osc_settings.download_item:
+    path: '/order-export/{item_id}/download'
+    defaults:
+        _controller: '\Drupal\osc_settings\Controller\ExportOrderFile::downloadItem'
+    requirements:
+        _permission: 'access content'

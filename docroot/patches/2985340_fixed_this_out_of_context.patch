@@ -1,0 +1,14 @@
+Index: docroot/modules/contrib/json_field/json_field.views.inc
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- docroot/modules/contrib/json_field/json_field.views.inc	(date 1544670301000)
++++ docroot/modules/contrib/json_field/json_field.views.inc	(date 1544737752233)
+@@ -16,5 +16,5 @@
+  */
+ function json_field_field_views_data(FieldStorageConfigInterface $field_storage) {
+   // Use the JSONViews service to get the views data.
+-  return $this->container->get('json_field.views')->getViewsFieldData($field_storage);
++  return \Drupal::service('json_field.views')->getViewsFieldData($field_storage);
+ }

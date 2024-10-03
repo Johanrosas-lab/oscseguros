@@ -1,0 +1,21 @@
+uuid: d12e2395-3e94-4527-84f0-ae6426320dfd
+langcode: es
+status: true
+dependencies:
+  config:
+    - field.storage.profile.field_tipo_de_cedula_fisica_aseg
+    - profile.type.aseguradora
+  module:
+    - options
+id: profile.aseguradora.field_tipo_de_cedula_fisica_aseg
+field_name: field_tipo_de_cedula_fisica_aseg
+entity_type: profile
+bundle: aseguradora
+label: 'Tipo de cedula fisica'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: list_string

@@ -1,0 +1,21 @@
+uuid: cad54335-fd14-4d7a-834e-85ce7b229ac7
+langcode: es
+status: true
+dependencies:
+  config:
+    - field.storage.profile.field_tipo_de_cedula_aseg
+    - profile.type.aseguradora
+  module:
+    - options
+id: profile.aseguradora.field_tipo_de_cedula_aseg
+field_name: field_tipo_de_cedula_aseg
+entity_type: profile
+bundle: aseguradora
+label: 'Tipo de cedula'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: list_string

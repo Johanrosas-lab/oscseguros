@@ -1,0 +1,149 @@
+{
+    "name": "drupal/drupal",
+    "description": "Drupal is an open source content management platform powering millions of websites and applications.",
+    "type": "project",
+    "license": "GPL-2.0-or-later",
+    "require": {
+        "composer/installers": "^1.0.24",
+        "wikimedia/composer-merge-plugin": "^1.4",
+        "drupal/console": "~1.8",
+        "drupal/address": "1.x-dev",
+        "drupal/commerce": "^2.13",
+        "drupal/social_auth_facebook": "~2.0",
+        "drupal/acquia_search": "^1.16",
+        "drupal/search_api": "^1.13",
+        "drupal/search_api_solr": "1.2",
+        "drupal/search_api_autocomplete": "^1.0",
+        "drupal/address_checkout": "^1.0@alpha",
+        "drupal/admin_toolbar": "^1.27",
+        "drupal/advancedqueue": "^1.0@beta",
+        "drupal/better_exposed_filters": "^3.0@alpha",
+        "drupal/block_class": "^1.0",
+        "drupal/commerce_paypal": "^1.0@beta",
+        "drupal/cors": "^1.0",
+        "drupal/devel": "^2.1",
+        "drupal/eck": "^1.0@alpha",
+        "drupal/email_registration": "^1.0@RC",
+        "drupal/entity_legal": "^2.0@beta",
+        "drupal/flag": "^4.0@alpha",
+        "drupal/fontawesome_menu_icons": "^1.3",
+        "drupal/image_effects": "^2.1",
+        "drupal/masquerade": "^2.0@beta",
+        "drupal/menu_token": "^1.0@alpha",
+        "drupal/paragraphs": "^1.8",
+        "drupal/persistent_login": "^1.0",
+        "drupal/physical": "^1.0@RC",
+        "drupal/popup_field_group": "^1.4",
+        "drupal/printfriendly": "^3.4",
+        "drupal/commerce_recurring": "^1.0@beta",
+        "drupal/rest_api_doc": "^1.0@RC",
+        "drupal/restui": "^1.17",
+        "drupal/share_everywhere": "^1.1",
+        "drupal/simple_fb_connect": "^3.1",
+        "drupal/slick": "^1.1",
+        "drupal/slick_views": "^2.0",
+        "drupal/social_api": "^2.0",
+        "drupal/social_auth": "^2.0",
+        "drupal/social_auth_google": "^2.0",
+        "drupal/social_media_links": "^2.6",
+        "drupal/stage_file_proxy": "^1.0@alpha",
+        "drupal/typed_data": "^1.0@alpha",
+        "drupal/views_slideshow": "^4.6",
+        "drupal/viewsreference": "^1.2",
+        "drupal/acquia_connector": "^1.16",
+        "drupal/copyright_block": "^1.0@RC",
+        "drupal/token_filter": "^1.0",
+        "drupal/commerce_cart_api": "^1.0",
+        "drupal/simple_oauth": "^3.16",
+        "drupal/rules": "^3.0@dev",
+        "drupal/captcha": "^1.0@beta",
+        "drupal/recaptcha": "^2.4",
+        "drupal/purge": "^3.0@beta",
+        "drupal/interval": "^1.2",
+        "drupal/recurring_period": "^1.0@alpha",
+        "drupal/acquia_purge": "^1.0@beta",
+        "drupal/json_field": "^1.0@RC",
+        "mikehaertl/php-pdftk": "^0.5.0",
+        "drupal/commerce_xquantity": "^1.0@alpha",
+        "drupal/views_data_export": "^1.0@beta",
+        "drupal/plaintext_encoder": "1.x-dev",
+        "drupal/consumers": "^1.9",
+        "drupal/field_group": "3.0-rc1",
+        "drupal/focal_point": "^1.0",
+        "drupal/fontawesome": "^2.13",
+        "drupal/profile": "1.0-rc5",
+        "drupal/entity": "1.0-rc3",
+        "drupal/readmehelp": "^1.0@beta",
+        "league/oauth2-server": "^7.4",
+        "drupal/commerce_cart": "^2.13",
+        "drupal/commerce_order": "^2.13",
+        "drupal/commerce_product": "^2.13",
+        "drupal/commerce_checkout": "^2.13",
+        "drupal/commerce_payment": "^2.13",
+        "drupal/commerce_price": "^2.13",
+        "drupal/commerce_store": "^2.13",
+        "drupal/commerce_tax": "^2.13",
+        "drupal/contribute": "^5.0",
+        "drupal/bootstrap": "^3.20",
+        "drupal/menu_export": "^1.2",
+        "drupal/config_ignore": "^2.1",
+        "drupal/menu_link_config": "^1.0@alpha"
+    },
+    "replace": {
+        "drupal/core": "^8.6"
+    },
+    "minimum-stability": "alpha",
+    "prefer-stable": true,
+    "config": {
+        "preferred-install": "dist",
+        "autoloader-suffix": "Drupal8",
+        "optimize-autoloader": true
+    },
+    "extra": {
+        "_readme": [
+            "By default Drupal loads the autoloader from ./vendor/autoload.php.",
+            "To change the autoloader you can edit ./autoload.php.",
+            "This file specifies the packages.drupal.org repository.",
+            "You can read more about this composer repository at:",
+            "https://www.drupal.org/node/2718229"
+        ],
+        "merge-plugin": {
+            "include": [
+                "core/composer.json"
+            ],
+            "recurse": true,
+            "replace": false,
+            "merge-extra": false
+        },
+        "installer-paths": {
+            "core": ["type:drupal-core"],
+            "modules/contrib/{$name}": ["type:drupal-module"],
+            "profiles/contrib/{$name}": ["type:drupal-profile"],
+            "themes/contrib/{$name}": ["type:drupal-theme"],
+            "drush/contrib/{$name}": ["type:drupal-drush"],
+            "modules/custom/{$name}": ["type:drupal-custom-module"],
+            "themes/custom/{$name}": ["type:drupal-custom-theme"]
+        }
+    },
+    "autoload": {
+        "psr-4": {
+            "Drupal\\Core\\Composer\\": "core/lib/Drupal/Core/Composer"
+        }
+    },
+    "scripts": {
+        "pre-autoload-dump": "Drupal\\Core\\Composer\\Composer::preAutoloadDump",
+        "post-autoload-dump": "Drupal\\Core\\Composer\\Composer::ensureHtaccess",
+        "post-package-install": "Drupal\\Core\\Composer\\Composer::vendorTestCodeCleanup",
+        "post-package-update": "Drupal\\Core\\Composer\\Composer::vendorTestCodeCleanup",
+        "drupal-phpunit-upgrade-check": "Drupal\\Core\\Composer\\Composer::upgradePHPUnit",
+        "drupal-phpunit-upgrade": "@composer update phpunit/phpunit --with-dependencies --no-progress",
+        "phpcs": "phpcs --standard=core/phpcs.xml.dist --runtime-set installed_paths $($COMPOSER_BINARY config vendor-dir)/drupal/coder/coder_sniffer --",
+        "phpcbf": "phpcbf --standard=core/phpcs.xml.dist --runtime-set installed_paths $($COMPOSER_BINARY config vendor-dir)/drupal/coder/coder_sniffer --"
+    },
+    "repositories": [
+        {
+            "type": "composer",
+            "url": "https://packages.drupal.org/8"
+        }
+    ]
+}

@@ -1,0 +1,397 @@
+diff --git a/modules/cart/src/CartManager.php b/modules/cart/src/CartManager.php
+index c0de845..e11f541 100644
+--- a/modules/cart/src/CartManager.php
++++ b/modules/cart/src/CartManager.php
+@@ -107,12 +107,16 @@ class CartManager implements CartManagerInterface {
+       $matching_order_item = $this->orderItemMatcher->match($order_item, $cart->getItems());
+     }
+     if ($matching_order_item) {
++      /** @var \Drupal\commerce_order\Entity\OrderItemInterface $original_order_item */
++      $original_order_item = $this->orderItemStorage->loadUnchanged($matching_order_item->id());
++
+       $new_quantity = Calculator::add($matching_order_item->getQuantity(), $quantity);
+       $matching_order_item->setQuantity($new_quantity);
+       $matching_order_item->save();
+       $saved_order_item = $matching_order_item;
+     }
+     else {
++      $original_order_item = NULL;
+       $order_item->set('order_id', $cart->id());
+       $order_item->save();
+       $cart->addItem($order_item);
+@@ -120,7 +124,7 @@ class CartManager implements CartManagerInterface {
+     }
+ 
+     if ($purchased_entity) {
+-      $event = new CartEntityAddEvent($cart, $purchased_entity, $quantity, $saved_order_item);
++      $event = new CartEntityAddEvent($cart, $purchased_entity, $quantity, $saved_order_item, $original_order_item);
+       $this->eventDispatcher->dispatch(CartEvents::CART_ENTITY_ADD, $event);
+     }
+ 
+diff --git a/modules/cart/src/Event/CartEntityAddEvent.php b/modules/cart/src/Event/CartEntityAddEvent.php
+index be783be..af1a117 100644
+--- a/modules/cart/src/Event/CartEntityAddEvent.php
++++ b/modules/cart/src/Event/CartEntityAddEvent.php
+@@ -43,6 +43,16 @@ class CartEntityAddEvent extends Event {
+   protected $orderItem;
+ 
+   /**
++   * The original order item.
++   *
++   * This will be NULL if there was no matching order item in the cart for the
++   * entity being added.
++   *
++   * @var \Drupal\commerce_order\Entity\OrderItemInterface|NULL
++   */
++  protected $originalOrderItem;
++
++  /**
+    * Constructs a new CartOrderItemEvent.
+    *
+    * @param \Drupal\commerce_order\Entity\OrderInterface $cart
+@@ -53,12 +63,16 @@ class CartEntityAddEvent extends Event {
+    *   The quantity.
+    * @param \Drupal\commerce_order\Entity\OrderItemInterface $order_item
+    *   The destination order item.
++   * @param \Drupal\commerce_order\Entity\OrderItemInterface|NULL $original_order_item
++   *   The original order item, or NULL if there was no matching order item in
++   *   the cart for the entity being added.
+    */
+-  public function __construct(OrderInterface $cart, PurchasableEntityInterface $entity, $quantity, OrderItemInterface $order_item) {
++  public function __construct(OrderInterface $cart, PurchasableEntityInterface $entity, $quantity, OrderItemInterface $order_item, $original_order_item) {
+     $this->cart = $cart;
+     $this->entity = $entity;
+     $this->quantity = $quantity;
+     $this->orderItem = $order_item;
++    $this->originalOrderItem = $original_order_item;
+   }
+ 
+   /**
+@@ -101,4 +115,18 @@ class CartEntityAddEvent extends Event {
+     return $this->orderItem;
+   }
+ 
++  /**
++   * Gets the original order item, if there was one.
++   *
++   * This is the case when the entity being added already had an order item in
++   * the cart.
++   *
++   * @return \Drupal\commerce_order\Entity\OrderItemInterface|NULL
++   *   The original order item, or NULL if the was no matching order item
++   *   already in the cart.
++   */
++  public function getOriginalOrderItem() {
++    return $this->originalOrderItem;
++  }
++
+ }
+diff --git a/modules/cart/src/EventSubscriber/CartEventSubscriber.php b/modules/cart/src/EventSubscriber/CartEventSubscriber.php
+index 4d18ede..4c4a303 100644
+--- a/modules/cart/src/EventSubscriber/CartEventSubscriber.php
++++ b/modules/cart/src/EventSubscriber/CartEventSubscriber.php
+@@ -51,6 +51,30 @@ class CartEventSubscriber implements EventSubscriberInterface {
+    *   The add to cart event.
+    */
+   public function displayAddToCartMessage(CartEntityAddEvent $event) {
++    $added_order_item = $event->getOrderItem();
++    if ($event->getOriginalOrderItem()) {
++      // If there was an original order item, and its quantity is the same as
++      // the current order item's quantity, then nothing was changed in the
++      // cart. This can be the case if another event subscriber changes the
++      // order item. In this case, do not show a message and assume that what
++      // made the change will explain what it has done to the user.
++      if ($event->getOriginalOrderItem()->getQuantity() == $added_order_item->getQuantity()) {
++        return;
++      }
++    }
++    else {
++      // Don't show if the order item is new, but no quantity of it was added,
++      // or the order item is no longer attached to an order. This can be the
++      // case if another event subscriber changed the quantity to zero, or
++      // removed the order item from the order.
++      if ($added_order_item->getQuantity() == 0) {
++        return;
++      }
++      if (!$event->getCart()->hasItem($added_order_item)) {
++        return;
++      }
++    }
++
+     $this->messenger->addMessage($this->t('@entity added to <a href=":url">your cart</a>.', [
+       '@entity' => $event->getEntity()->label(),
+       ':url' => Url::fromRoute('commerce_cart.page')->toString(),
+diff --git a/modules/cart/tests/modules/commerce_add_to_cart_test/commerce_add_to_cart_test.info.yml b/modules/cart/tests/modules/commerce_add_to_cart_test/commerce_add_to_cart_test.info.yml
+new file mode 100644
+index 0000000..8936fc7
+--- /dev/null
++++ b/modules/cart/tests/modules/commerce_add_to_cart_test/commerce_add_to_cart_test.info.yml
+@@ -0,0 +1,8 @@
++name: 'Commerce Add To Cart Test'
++type: module
++description: 'Contains event subscriber to change order items that are added to the cart.'
++dependencies:
++  - commerce:commerce_cart
++  - commerce:commerce_product
++package: Testing
++core: 8.x
+diff --git a/modules/cart/tests/modules/commerce_add_to_cart_test/commerce_add_to_cart_test.services.yml b/modules/cart/tests/modules/commerce_add_to_cart_test/commerce_add_to_cart_test.services.yml
+new file mode 100644
+index 0000000..d27dcde
+--- /dev/null
++++ b/modules/cart/tests/modules/commerce_add_to_cart_test/commerce_add_to_cart_test.services.yml
+@@ -0,0 +1,6 @@
++services:
++  commerce_add_to_cart_test.cart_item_remover:
++    class: Drupal\commerce_add_to_cart_test\EventSubscriber\CartItemRemover
++    arguments: ['@state']
++    tags:
++      - { name: event_subscriber, priority: 0 }
+diff --git a/modules/cart/tests/modules/commerce_add_to_cart_test/src/EventSubscriber/CartItemRemover.php b/modules/cart/tests/modules/commerce_add_to_cart_test/src/EventSubscriber/CartItemRemover.php
+new file mode 100644
+index 0000000..eb4947d
+--- /dev/null
++++ b/modules/cart/tests/modules/commerce_add_to_cart_test/src/EventSubscriber/CartItemRemover.php
+@@ -0,0 +1,76 @@
++<?php
++
++namespace Drupal\commerce_add_to_cart_test\EventSubscriber;
++
++use Drupal\Core\State\StateInterface;
++use Drupal\commerce_cart\Event\CartEvents;
++use Drupal\commerce_cart\Event\CartEntityAddEvent;
++use Symfony\Component\EventDispatcher\EventSubscriberInterface;
++
++/**
++ * Removes items from the cart when they are added, if state indicates to do so.
++ */
++class CartItemRemover implements EventSubscriberInterface {
++
++  /**
++   * The state storage service.
++   *
++   * @var \Drupal\Core\State\StateInterface
++   */
++  protected $state;
++
++  /**
++   * Creates a CartItemRemover instance.
++   *
++   * @param \Drupal\Core\State\StateInterface $state
++   *   The state storage service.
++   */
++  public function __construct(StateInterface $state) {
++    $this->state = $state;
++  }
++
++  /**
++   * {@inheritdoc}
++   */
++  public static function getSubscribedEvents() {
++    $events = [
++      // These need to run before \Drupal\commerce_cart\EventSubscriber\CartEventSubscriber
++      CartEvents::CART_ENTITY_ADD => ['onCartEntityAdd', 100],
++    ];
++    return $events;
++  }
++
++  /**
++   * Removes the item from the cart if the state says to do so.
++   *
++   * @param \Drupal\commerce_cart\Event\CartEntityAddEvent $event
++   *   The cart event.
++   */
++  public function onCartEntityAdd(CartEntityAddEvent $event) {
++    $order_item = $event->getOrderItem();
++    $order = $event->getCart();
++
++    // Tests should set a value in the state to tell us what to do.
++    $command = $this->state->get('commerce_add_to_cart_test_command');
++    if (empty($command)) {
++      return;
++    }
++
++    if ($command == 'remove_item') {
++      // Remove the item from the cart and delete the item.
++      $order->removeItem($order_item);
++      $order_item->delete();
++
++      return;
++    }
++
++    if ($command == 'keep_quantity') {
++      // Force the quantity back to 1 and save it again.
++      $order_item->setQuantity(1);
++      $order_item->save();
++
++      return;
++    }
++  }
++
++}
+diff --git a/modules/cart/tests/src/Kernel/AddToCartMessageTest.php b/modules/cart/tests/src/Kernel/AddToCartMessageTest.php
+new file mode 100644
+index 0000000..80641aa
+--- /dev/null
++++ b/modules/cart/tests/src/Kernel/AddToCartMessageTest.php
+@@ -0,0 +1,160 @@
++<?php
++
++namespace Drupal\Tests\commerce_cart\Kernel;
++
++use Drupal\Core\Messenger\MessengerInterface;
++use Drupal\commerce_order\Entity\OrderItem;
++use Drupal\commerce_price\Price;
++use Drupal\commerce_order\Entity\OrderInterface;
++use Drupal\commerce_product\Entity\ProductVariation;
++use Drupal\Tests\commerce\Kernel\CommerceKernelTestBase;
++use Prophecy\Argument;
++
++/**
++ * Tests the add to cart message.
++ *
++ * @group commerce
++ */
++class AddToCartMessageTest extends CommerceKernelTestBase {
++
++  use CartManagerTestTrait;
++
++  /**
++   * The cart manager.
++   *
++   * @var \Drupal\commerce_cart\CartManager
++   */
++  protected $cartManager;
++
++  /**
++   * The cart provider.
++   *
++   * @var \Drupal\commerce_cart\CartProvider
++   */
++  protected $cartProvider;
++
++  /**
++   * A sample user.
++   *
++   * @var \Drupal\user\UserInterface
++   */
++  protected $user;
++
++  /**
++   * A product variation.
++   *
++   * @var \Drupal\commerce_product\Entity\ProductVariation
++   */
++  protected $variation;
++
++  /**
++   * Modules to enable.
++   *
++   * @var array
++   */
++  public static $modules = [
++    'entity_reference_revisions',
++    'path',
++    'profile',
++    'state_machine',
++    'commerce_product',
++    'commerce_order',
++    'commerce_add_to_cart_test',
++  ];
++
++  /**
++   * {@inheritdoc}
++   */
++  protected function setUp() {
++    parent::setUp();
++
++    $this->installEntitySchema('commerce_order');
++    $this->installConfig(['commerce_order']);
++    $this->installConfig(['commerce_product']);
++
++    $this->variation = ProductVariation::create([
++      'type' => 'default',
++      'sku' => strtolower($this->randomMachineName()),
++      'title' => $this->randomString(),
++      'price' => new Price('1.00', 'USD'),
++      'status' => 1,
++    ]);
++
++    $user = $this->createUser();
++    $this->user = $this->reloadEntity($user);
++
++    $this->installCommerceCart();
++  }
++
++  /**
++   * Tests there is no message when the adding is prevented.
++   */
++  public function testItemAddPrevented() {
++    $cart = $this->cartProvider->createCart('default', $this->store, $this->user);
++    $this->assertInstanceOf(OrderInterface::class, $cart);
++    $this->assertEmpty($cart->getItems());
++
++    // Remove the item as it is added: no message will be shown.
++    $this->container->get('state')->set('commerce_add_to_cart_test_command', 'remove_item');
++    /** @var MessengerInterface $messenger */
++    $messenger = $this->prophesize(MessengerInterface::class);
++    $messenger->addMessage(Argument::any())->shouldNotBeCalled();
++    $this->container->set('messenger', $messenger->reveal());
++
++    $order_item1 = $this->cartManager->addEntity($cart, $this->variation);
++
++    $this->assertFalse($cart->hasItems(), "No item was added to the cart.");
++  }
++
++  /**
++   * Tests the add to cart message when adding is allowed.
++   */
++  public function testItemAddAllowed() {
++    $cart = $this->cartProvider->createCart('default', $this->store, $this->user);
++    $this->assertInstanceOf(OrderInterface::class, $cart);
++    $this->assertEmpty($cart->getItems());
++
++    // Allow the item to be added: a message will be shown.
++    $this->container->get('state')->set('commerce_add_to_cart_test_command', NULL);
++    /** @var MessengerInterface $messenger */
++    $messenger = $this->prophesize(MessengerInterface::class);
++    $messenger->addMessage(Argument::any())->shouldBeCalledTimes(1);
++    $this->container->set('messenger', $messenger->reveal());
++
++    $order_item1 = $this->cartManager->addEntity($cart, $this->variation);
++
++    $order_item1 = $this->reloadEntity($order_item1);
++    $this->assertNotEmpty($cart->hasItem($order_item1));
++    $this->assertEquals(1, $order_item1->getQuantity());
++  }
++
++  /**
++   * Tests no add to cart message when the quantity is held fixed.
++   */
++  public function testItemAddQuantityFixed() {
++    $cart = $this->cartProvider->createCart('default', $this->store, $this->user);
++    $this->assertInstanceOf(OrderInterface::class, $cart);
++    $this->assertEmpty($cart->getItems());
++
++    // Allow one item to be added first.
++    $this->container->get('state')->set('commerce_add_to_cart_test_command', NULL);
++
++    $order_item1 = $this->cartManager->addEntity($cart, $this->variation);
++    $order_item1 = $this->reloadEntity($order_item1);
++    $this->assertNotEmpty($cart->hasItem($order_item1));
++    $this->assertEquals(1, $order_item1->getQuantity());
++
++    // Restrict the order item count: a message will not be shown.
++    $this->container->get('state')->set('commerce_add_to_cart_test_command', 'keep_quantity');
++    /** @var MessengerInterface $messenger */
++    $messenger = $this->prophesize(MessengerInterface::class);
++    $messenger->addMessage(Argument::any())->shouldNotBeCalled();
++    $this->container->set('messenger', $messenger->reveal());
++
++    $order_item1 = $this->cartManager->addEntity($cart, $this->variation);
++    $order_item1 = $this->reloadEntity($order_item1);
++    $this->assertNotEmpty($cart->hasItem($order_item1));
++    $this->assertEquals(1, $order_item1->getQuantity(), "The quantity of the order item is unchanged.");
++  }
++
++}

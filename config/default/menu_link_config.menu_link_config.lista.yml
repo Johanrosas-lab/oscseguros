@@ -1,0 +1,15 @@
+uuid: 07e3c49c-d5eb-43a0-b6e8-77cdf8012ba8
+langcode: es
+status: true
+dependencies: {  }
+id: lista
+title: Lista
+route_name: entity.user.collection
+route_parameters: {  }
+options: {  }
+expanded: false
+menu_name: administracion-aseguradora
+enabled: true
+parent: 'menu_link_config:usuarios'
+weight: 0
+description: ''

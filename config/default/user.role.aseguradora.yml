@@ -1,0 +1,9 @@
+uuid: 60b89d9c-2d8c-470d-83c4-c5a7f8cb78d2
+langcode: es
+status: true
+dependencies: {  }
+id: aseguradora
+label: Aseguradora
+weight: 8
+is_admin: null
+permissions: {  }

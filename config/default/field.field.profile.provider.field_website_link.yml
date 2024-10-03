@@ -1,0 +1,23 @@
+uuid: e5828875-02f5-4539-a538-0c082fff8952
+langcode: es
+status: true
+dependencies:
+  config:
+    - field.storage.profile.field_website_link
+    - profile.type.provider
+  module:
+    - link
+id: profile.provider.field_website_link
+field_name: field_website_link
+entity_type: profile
+bundle: provider
+label: 'Link del sitio web'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  link_type: 17
+  title: 1
+field_type: link

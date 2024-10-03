@@ -1,0 +1,18 @@
+uuid: f403994e-ef94-4566-8d87-a0eb937a4fd8
+langcode: es
+status: true
+dependencies:
+  module:
+    - profile
+id: profile.field_correo_electronico_
+field_name: field_correo_electronico_
+entity_type: profile
+type: email
+settings: {  }
+module: core
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

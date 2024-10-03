@@ -1,0 +1,21 @@
+uuid: 09d02e48-c2e8-4c17-8025-ab23fd14b5f7
+langcode: es
+status: true
+dependencies:
+  module:
+    - profile
+id: profile.field_correo_representante_legal
+field_name: field_correo_representante_legal
+entity_type: profile
+type: string
+settings:
+  max_length: 255
+  is_ascii: false
+  case_sensitive: false
+module: core
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

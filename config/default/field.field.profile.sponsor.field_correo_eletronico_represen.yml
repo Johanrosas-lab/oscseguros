@@ -1,0 +1,19 @@
+uuid: 3755cac9-f0db-4014-98d1-c8d17d0b38d7
+langcode: es
+status: true
+dependencies:
+  config:
+    - field.storage.profile.field_correo_eletronico_represen
+    - profile.type.sponsor
+id: profile.sponsor.field_correo_eletronico_represen
+field_name: field_correo_eletronico_represen
+entity_type: profile
+bundle: sponsor
+label: 'Correo eletrónico representante legal'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: email

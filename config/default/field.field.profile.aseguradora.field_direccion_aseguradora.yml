@@ -1,0 +1,39 @@
+uuid: 039da0e2-5bfe-4f18-957d-67e9f0446ae4
+langcode: es
+status: true
+dependencies:
+  config:
+    - field.storage.profile.field_direccion_aseguradora
+    - profile.type.aseguradora
+  module:
+    - address
+id: profile.aseguradora.field_direccion_aseguradora
+field_name: field_direccion_aseguradora
+entity_type: profile
+bundle: aseguradora
+label: Direccion
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  available_countries: {  }
+  langcode_override: ''
+  field_overrides:
+    givenName:
+      override: hidden
+    additionalName:
+      override: hidden
+    familyName:
+      override: hidden
+    organization:
+      override: hidden
+    sortingCode:
+      override: hidden
+    dependentLocality:
+      override: hidden
+    administrativeArea:
+      override: hidden
+  fields: {  }
+field_type: address

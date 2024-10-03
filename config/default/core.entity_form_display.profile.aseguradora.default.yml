@@ -1,0 +1,122 @@
+uuid: 54768483-4dec-4aae-9c46-6b9b47e422e9
+langcode: es
+status: true
+dependencies:
+  config:
+    - field.field.profile.aseguradora.field_actividad_economica_aseg
+    - field.field.profile.aseguradora.field_cedula_aseguradora
+    - field.field.profile.aseguradora.field_correo_ele_rep_aseguradora
+    - field.field.profile.aseguradora.field_correo_electronico_
+    - field.field.profile.aseguradora.field_direccion_aseguradora
+    - field.field.profile.aseguradora.field_direccion_rep_aseg
+    - field.field.profile.aseguradora.field_nombre_aseguradora
+    - field.field.profile.aseguradora.field_nombre_rep_legal_aseg
+    - field.field.profile.aseguradora.field_numero_de_cedula_rep_asg
+    - field.field.profile.aseguradora.field_numero_telefono_aseg
+    - field.field.profile.aseguradora.field_numero_telefono_rep_aseg
+    - field.field.profile.aseguradora.field_tipo_de_cedula_aseg
+    - field.field.profile.aseguradora.field_tipo_de_cedula_fisica_aseg
+    - profile.type.aseguradora
+  module:
+    - address
+    - telephone
+id: profile.aseguradora.default
+targetEntityType: profile
+bundle: aseguradora
+mode: default
+content:
+  field_actividad_economica_aseg:
+    weight: 26
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: string_textfield
+    region: content
+  field_cedula_aseguradora:
+    weight: 27
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: string_textfield
+    region: content
+  field_correo_ele_rep_aseguradora:
+    weight: 29
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: email_default
+    region: content
+  field_correo_electronico_:
+    weight: 28
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: email_default
+    region: content
+  field_direccion_aseguradora:
+    weight: 30
+    settings: {  }
+    third_party_settings: {  }
+    type: address_default
+    region: content
+  field_direccion_rep_aseg:
+    weight: 31
+    settings: {  }
+    third_party_settings: {  }
+    type: address_default
+    region: content
+  field_nombre_aseguradora:
+    weight: 32
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: string_textfield
+    region: content
+  field_nombre_rep_legal_aseg:
+    weight: 39
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: string_textfield
+    region: content
+  field_numero_de_cedula_rep_asg:
+    weight: 34
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: string_textfield
+    region: content
+  field_numero_telefono_aseg:
+    weight: 35
+    settings:
+      placeholder: ''
+    third_party_settings: {  }
+    type: telephone_default
+    region: content
+  field_numero_telefono_rep_aseg:
+    weight: 36
+    settings:
+      placeholder: ''
+    third_party_settings: {  }
+    type: telephone_default
+    region: content
+  field_tipo_de_cedula_aseg:
+    weight: 37
+    settings: {  }
+    third_party_settings: {  }
+    type: options_select
+    region: content
+  field_tipo_de_cedula_fisica_aseg:
+    weight: 38
+    settings: {  }
+    third_party_settings: {  }
+    type: options_select
+    region: content
+hidden: {  }

@@ -1,0 +1,19 @@
+uuid: 70acf52c-7898-4945-ac88-3c68babc0c10
+langcode: es
+status: true
+dependencies:
+  module:
+    - address
+    - profile
+id: profile.field_direccion_rep_aseg
+field_name: field_direccion_rep_aseg
+entity_type: profile
+type: address
+settings: {  }
+module: address
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

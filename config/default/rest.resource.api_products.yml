@@ -1,0 +1,18 @@
+uuid: 66201f70-fab1-4c00-bf68-bb7a527a2f75
+langcode: es
+status: true
+dependencies:
+  module:
+    - osc_commerce_rest
+    - serialization
+    - simple_oauth
+id: api_products
+plugin_id: api_products
+granularity: resource
+configuration:
+  methods:
+    - GET
+  formats:
+    - json
+  authentication:
+    - oauth2

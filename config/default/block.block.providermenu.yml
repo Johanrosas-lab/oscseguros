@@ -1,0 +1,37 @@
+uuid: 045a0e56-01df-4da1-8626-9c4adeda747c
+langcode: es
+status: true
+dependencies:
+  config:
+    - system.menu.-provider-menu
+  module:
+    - block_class
+    - system
+    - user
+  theme:
+    - insurance_theme
+third_party_settings:
+  block_class:
+    classes: visible-xs
+id: providermenu
+theme: insurance_theme
+region: navigation_collapsible
+weight: -11
+provider: null
+plugin: 'system_menu_block:-provider-menu'
+settings:
+  id: 'system_menu_block:-provider-menu'
+  label: ' Provider Menu'
+  provider: system
+  label_display: '0'
+  level: 1
+  depth: 0
+  expand_all_items: false
+visibility:
+  user_role:
+    id: user_role
+    roles:
+      channel_manager: channel_manager
+    negate: false
+    context_mapping:
+      user: '@user.current_user_context:current_user'

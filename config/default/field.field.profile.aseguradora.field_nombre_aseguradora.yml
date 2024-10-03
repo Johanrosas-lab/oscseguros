@@ -1,0 +1,19 @@
+uuid: 50a313fb-cb43-4980-a3e9-2b10a3dd385e
+langcode: es
+status: true
+dependencies:
+  config:
+    - field.storage.profile.field_nombre_aseguradora
+    - profile.type.aseguradora
+id: profile.aseguradora.field_nombre_aseguradora
+field_name: field_nombre_aseguradora
+entity_type: profile
+bundle: aseguradora
+label: Nombre
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

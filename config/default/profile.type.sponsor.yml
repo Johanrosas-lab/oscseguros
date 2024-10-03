@@ -1,0 +1,20 @@
+uuid: 23c9a58c-fbdd-4a76-a1de-522a6641640c
+langcode: es
+status: true
+dependencies: {  }
+id: sponsor
+label: Sponsor
+multiple: false
+registration: false
+roles:
+  sponsor: sponsor
+  administrator: '0'
+  service_provider: '0'
+  customer: '0'
+  channel_manager: '0'
+  provider: '0'
+  authenticated: '0'
+  aseguradora: '0'
+  op: '0'
+allow_revisions: false
+new_revision: false

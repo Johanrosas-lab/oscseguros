@@ -1,0 +1,20 @@
+uuid: d94c084d-83c1-4ae8-961f-c3a35361b0c7
+langcode: es
+status: true
+dependencies:
+  module:
+    - osc_commerce_rest
+    - serialization
+    - simple_oauth
+id: beneficiaries
+plugin_id: beneficiaries
+granularity: resource
+configuration:
+  methods:
+    - GET
+    - POST
+    - PATCH
+  formats:
+    - json
+  authentication:
+    - oauth2

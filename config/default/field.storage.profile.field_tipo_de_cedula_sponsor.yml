@@ -1,0 +1,27 @@
+uuid: 83aa1590-ca20-4420-a6b2-41a3bffcf7ac
+langcode: es
+status: true
+dependencies:
+  module:
+    - options
+    - profile
+id: profile.field_tipo_de_cedula_sponsor
+field_name: field_tipo_de_cedula_sponsor
+entity_type: profile
+type: list_string
+settings:
+  allowed_values:
+    -
+      value: 'Cédula jurídica'
+      label: 'Cédula jurídica'
+    -
+      value: 'Cédula Física'
+      label: 'Cédula Física'
+  allowed_values_function: ''
+module: options
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

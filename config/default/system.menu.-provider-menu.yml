@@ -1,0 +1,8 @@
+uuid: 50610ea0-6d16-4109-b32f-04c6e69f9f38
+langcode: es
+status: true
+dependencies: {  }
+id: '-provider-menu'
+label: ' Provider Menu'
+description: 'Proveedores '
+locked: false

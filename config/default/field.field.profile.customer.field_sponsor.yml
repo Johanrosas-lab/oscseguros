@@ -1,0 +1,21 @@
+uuid: 51061997-c9a6-4a03-ba98-21096421bb2a
+langcode: es
+status: true
+dependencies:
+  config:
+    - field.storage.profile.field_sponsor
+    - profile.type.customer
+id: profile.customer.field_sponsor
+field_name: field_sponsor
+entity_type: profile
+bundle: customer
+label: Sponsor
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:user'
+  handler_settings: {  }
+field_type: entity_reference

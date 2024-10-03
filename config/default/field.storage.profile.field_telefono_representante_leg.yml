@@ -1,0 +1,19 @@
+uuid: 2bde1dcf-1189-4465-9d08-345bdc328721
+langcode: es
+status: true
+dependencies:
+  module:
+    - profile
+    - telephone
+id: profile.field_telefono_representante_leg
+field_name: field_telefono_representante_leg
+entity_type: profile
+type: telephone
+settings: {  }
+module: telephone
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

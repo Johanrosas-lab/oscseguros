@@ -1,0 +1,19 @@
+uuid: 4b79ae96-059d-41d9-977a-62c093aafefc
+langcode: es
+status: true
+dependencies:
+  module:
+    - osc_settings
+    - serialization
+    - simple_oauth
+id: entity_legal
+plugin_id: entity_legal
+granularity: resource
+configuration:
+  methods:
+    - GET
+    - POST
+  formats:
+    - json
+  authentication:
+    - oauth2

@@ -1,0 +1,19 @@
+uuid: 20438c90-28e8-4e30-9d48-1bdc97594ab7
+langcode: es
+status: true
+dependencies:
+  config:
+    - commerce_order.commerce_order_type.default
+    - field.storage.commerce_order.field_contract_data_form
+id: commerce_order.default.field_contract_data_form
+field_name: field_contract_data_form
+entity_type: commerce_order
+bundle: default
+label: 'Contract Data Form'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

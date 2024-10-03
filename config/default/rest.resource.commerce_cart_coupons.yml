@@ -1,0 +1,25 @@
+<<<<<<< HEAD
+uuid: 2dd5c1dc-a5b3-4ad3-9caf-24762af8862b
+langcode: es
+=======
+uuid: 1ff76ae4-68b1-4c7e-bbd2-a9458b08974f
+langcode: en
+>>>>>>> de07639e7... Update config
+status: true
+dependencies:
+  module:
+    - commerce_cart_api
+    - serialization
+    - user
+id: commerce_cart_coupons
+plugin_id: commerce_cart_coupons
+granularity: resource
+configuration:
+  methods:
+    - GET
+    - PATCH
+    - DELETE
+  formats:
+    - json
+  authentication:
+    - cookie

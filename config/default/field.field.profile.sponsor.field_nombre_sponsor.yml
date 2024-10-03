@@ -1,0 +1,19 @@
+uuid: 541b71cb-260b-4946-a587-569c25761571
+langcode: es
+status: true
+dependencies:
+  config:
+    - field.storage.profile.field_nombre_sponsor
+    - profile.type.sponsor
+id: profile.sponsor.field_nombre_sponsor
+field_name: field_nombre_sponsor
+entity_type: profile
+bundle: sponsor
+label: Nombre
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

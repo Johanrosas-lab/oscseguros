@@ -1,0 +1,18 @@
+uuid: de9a9684-053a-4adf-b883-554ac8bf41e5
+langcode: es
+status: true
+dependencies:
+  module:
+    - basic_auth
+    - osc_settings
+    - serialization
+id: facebook_login
+plugin_id: facebook_login
+granularity: resource
+configuration:
+  methods:
+    - POST
+  formats:
+    - json
+  authentication:
+    - basic_auth

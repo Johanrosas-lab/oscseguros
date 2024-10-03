@@ -1,0 +1,19 @@
+uuid: 6a04475e-75a5-4aa3-903d-780ac1579de0
+langcode: es
+status: true
+dependencies:
+  config:
+    - field.storage.profile.field_correo_electronico_sponsor
+    - profile.type.sponsor
+id: profile.sponsor.field_correo_electronico_sponsor
+field_name: field_correo_electronico_sponsor
+entity_type: profile
+bundle: sponsor
+label: 'Correo electronico'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: email

@@ -1,0 +1,60 @@
+uuid: af7bb207-12e8-469e-aa17-027e25c8fbc2
+langcode: es
+status: false
+dependencies:
+  config:
+    - field.storage.commerce_product.body
+  module:
+    - commerce_product
+    - search_api
+_core:
+  default_config_hash: '-ggwZpvT2-Ey1fqPkREitA6TGI_m5dTHD9vZm9FrlSQ'
+id: acquia_search_index
+name: 'Acquia Search Solr Index'
+description: ''
+read_only: false
+field_settings:
+  body:
+    label: Body
+    datasource_id: 'entity:commerce_product'
+    property_path: body
+    type: string
+    dependencies:
+      config:
+        - field.storage.commerce_product.body
+  title:
+    label: Title
+    datasource_id: 'entity:commerce_product'
+    property_path: title
+    type: string
+    dependencies:
+      module:
+        - commerce_product
+datasource_settings:
+  'entity:commerce_product':
+    bundles:
+      default: true
+      selected: {  }
+    languages:
+      default: true
+      selected: {  }
+processor_settings:
+  add_url:
+    plugin_id: add_url
+    settings: {  }
+  aggregated_field: {  }
+  rendered_item: {  }
+tracker_settings:
+  default:
+    indexing_order: fifo
+options:
+  index_directly: true
+  cron_limit: 50
+  processors:
+    language:
+      status: '1'
+      weight: -50
+      settings: {  }
+      processorPluginId: language
+  overridden_by_acquia_search: 2
+server: ''

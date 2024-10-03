@@ -1,0 +1,19 @@
+uuid: ddcf2552-57f3-476b-a925-5218c73b9a6e
+langcode: es
+status: true
+dependencies:
+  config:
+    - field.storage.profile.field_cedula_aseguradora
+    - profile.type.aseguradora
+id: profile.aseguradora.field_cedula_aseguradora
+field_name: field_cedula_aseguradora
+entity_type: profile
+bundle: aseguradora
+label: Cedula_aseguradora
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

@@ -1,0 +1,21 @@
+uuid: 96455f29-d088-4f78-be73-ac52a41ee835
+langcode: es
+status: true
+dependencies:
+  module:
+    - commerce_product
+id: commerce_product.field_immediate_acceptance
+field_name: field_immediate_acceptance
+entity_type: commerce_product
+type: string
+settings:
+  max_length: 255
+  is_ascii: false
+  case_sensitive: false
+module: core
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

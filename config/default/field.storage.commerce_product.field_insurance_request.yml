@@ -1,0 +1,23 @@
+uuid: f19fbabc-ce70-469f-b2b3-8bb292f19a0b
+langcode: es
+status: true
+dependencies:
+  module:
+    - commerce_product
+    - file
+id: commerce_product.field_insurance_request
+field_name: field_insurance_request
+entity_type: commerce_product
+type: file
+settings:
+  display_field: false
+  display_default: false
+  uri_scheme: public
+  target_type: file
+module: file
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

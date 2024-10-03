@@ -1,0 +1,19 @@
+uuid: 80078ee7-c490-4dd1-9fd3-c659ce9c9efc
+langcode: es
+status: true
+dependencies:
+  module:
+    - address
+    - profile
+id: profile.field_provider_address
+field_name: field_provider_address
+entity_type: profile
+type: address
+settings: {  }
+module: address
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

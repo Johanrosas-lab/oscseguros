@@ -1,0 +1,19 @@
+uuid: 072be7c2-e7a0-42a2-852d-8689adf840f8
+langcode: es
+status: true
+dependencies:
+  module:
+    - klap_payment
+id: klap
+label: Klap
+weight: null
+plugin: klap_onsite
+configuration:
+  app_name: LIZTEST
+  app_pass: LTFTTMAR2318%
+  display_label: Klap
+  mode: test
+  payment_method_types:
+    - credit_card
+conditions: {  }
+conditionOperator: AND

@@ -1,0 +1,21 @@
+uuid: 6d77f9d2-b8e0-4312-af6f-2f6463f61480
+langcode: es
+status: true
+dependencies:
+  config:
+    - field.storage.profile.field_business_id
+    - profile.type.provider
+  module:
+    - text
+id: profile.provider.field_business_id
+field_name: field_business_id
+entity_type: profile
+bundle: provider
+label: Cédula
+description: ''
+required: true
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: text

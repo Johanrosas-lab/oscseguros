@@ -1,0 +1,14 @@
+uuid: a54b4605-6560-46e4-a21b-b53fa4a91e0c
+langcode: es
+status: true
+dependencies:
+  config:
+    - user.role.aseguradora
+  module:
+    - user
+id: user_add_role_action.aseguradora
+label: 'Add the Aseguradora role to the selected user(s)'
+type: user
+plugin: user_add_role_action
+configuration:
+  rid: aseguradora

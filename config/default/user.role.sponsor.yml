@@ -1,0 +1,9 @@
+uuid: e4a51075-1de9-404a-8374-8c7f22e3f3ec
+langcode: es
+status: true
+dependencies: {  }
+id: sponsor
+label: Sponsor
+weight: 10
+is_admin: null
+permissions: {  }

@@ -1,0 +1,14 @@
+uuid: 181c043e-057f-4bdc-a652-1e024de6e6f2
+langcode: es
+status: true
+dependencies:
+  config:
+    - user.role.service_provider
+  module:
+    - user
+id: user_add_role_action.service_provider
+label: 'Add the Service Provider role to the selected user(s)'
+type: user
+plugin: user_add_role_action
+configuration:
+  rid: service_provider

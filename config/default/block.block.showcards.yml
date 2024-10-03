@@ -1,0 +1,26 @@
+uuid: 84df9de9-e19a-40e7-b64f-84cc7b533f84
+langcode: es
+status: true
+dependencies:
+  module:
+    - klap_payment
+    - system
+  theme:
+    - insurance_theme
+id: showcards
+theme: insurance_theme
+region: content
+weight: -9
+provider: null
+plugin: klap_list_card_block
+settings:
+  id: klap_list_card_block
+  label: 'Show cards'
+  provider: klap_payment
+  label_display: '0'
+visibility:
+  request_path:
+    id: request_path
+    pages: /payment-methods/list
+    negate: false
+    context_mapping: {  }

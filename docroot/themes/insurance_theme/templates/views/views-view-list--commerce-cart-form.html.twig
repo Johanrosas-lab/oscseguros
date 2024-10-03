@@ -1,0 +1,47 @@
+{#
+/**
+ * @file
+ * Default theme implementation for a view template to display a list of rows.
+ *
+ * Available variables:
+ * - attributes: HTML attributes for the container.
+ * - rows: A list of rows for this list.
+ *   - attributes: The row's HTML attributes.
+ *   - content: The row's contents.
+ * - title: The title of this group of rows. May be empty.
+ * - list: @todo.
+ *   - type: Starting tag will be either a ul or ol.
+ *   - attributes: HTML attributes for the list element.
+ *
+ * @see template_preprocess_views_view_list()
+ *
+ * @ingroup themeable
+ */
+#}
+<ol class="checkout-progress clearfix">
+  <li class="checkout-progress--step checkout-progress--step__1"><span>1</span>Resumen</li>
+  <li class="checkout-progress--step checkout-progress--step__2"><span>2</span>Formalización</li>
+  <li class="checkout-progress--step checkout-progress--step__3"><span>3</span>Pago</li>
+  <li class="checkout-progress--step checkout-progress--step__4"><span>4</span>Revisión</li>
+</ol>
+{% if attributes -%}
+  <div{{ attributes }}>
+{% endif %}
+  {% if title %}
+    <h3>{{ title }}</h3>
+  {% endif %}
+  <{{ list.type }}{{ list.attributes }}>
+  <div class="cart-products-label">
+    <h2>Productos</h2>
+  </div>
+    {% for row in rows %}
+      <li{{ row.attributes }}>
+        {{- row.content -}}
+      </li>
+    {% endfor %}
+
+  </{{ list.type }}>
+
+{% if attributes -%}
+  </div>
+{% endif %}

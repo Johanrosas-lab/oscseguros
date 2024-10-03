@@ -1,0 +1,21 @@
+uuid: 425662f5-5fcd-4e32-8bdb-815fa28e74a5
+langcode: es
+status: true
+dependencies:
+  config:
+    - field.storage.profile.field_tipo_de_cedula_sponsor
+    - profile.type.sponsor
+  module:
+    - options
+id: profile.sponsor.field_tipo_de_cedula_sponsor
+field_name: field_tipo_de_cedula_sponsor
+entity_type: profile
+bundle: sponsor
+label: 'Tipo de cedula'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: list_string

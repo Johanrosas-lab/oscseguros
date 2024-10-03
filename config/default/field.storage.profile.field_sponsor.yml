@@ -1,0 +1,20 @@
+uuid: 4dd0df64-39f9-44e4-b7d5-f3655d721781
+langcode: es
+status: true
+dependencies:
+  module:
+    - profile
+    - user
+id: profile.field_sponsor
+field_name: field_sponsor
+entity_type: profile
+type: entity_reference
+settings:
+  target_type: user
+module: core
+locked: false
+cardinality: -1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

@@ -1,0 +1,10 @@
+***************
+*** 0 ****
+--- 1,7 ----
++ block.settings.commerce_wishlist_block:
++   type: block_settings
++   label: 'Wishlist block'
++   mapping:
++     dropdown:
++       type: boolean
++       label: 'Display wishlist contents in dropdown'

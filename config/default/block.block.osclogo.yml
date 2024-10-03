@@ -1,0 +1,31 @@
+uuid: b881d3ad-4dca-4408-a0d9-cea155a07e2f
+langcode: es
+status: true
+dependencies:
+  content:
+    - 'block_content:basic:f7c10730-76a0-4fea-9f43-766c6edbf464'
+  module:
+    - block_content
+    - system
+  theme:
+    - insurance_theme
+id: osclogo
+theme: insurance_theme
+region: footer
+weight: 0
+provider: null
+plugin: 'block_content:f7c10730-76a0-4fea-9f43-766c6edbf464'
+settings:
+  id: 'block_content:f7c10730-76a0-4fea-9f43-766c6edbf464'
+  label: 'OSC Logo'
+  provider: block_content
+  label_display: '0'
+  status: true
+  info: ''
+  view_mode: full
+visibility:
+  request_path:
+    id: request_path
+    pages: '<front>'
+    negate: false
+    context_mapping: {  }

@@ -1,0 +1,21 @@
+uuid: abe0cfdc-35c2-47a6-9524-2e24c0a094b7
+langcode: es
+status: true
+dependencies:
+  module:
+    - commerce_product
+id: commerce_product.field_sugece_colons
+field_name: field_sugece_colons
+entity_type: commerce_product
+type: string
+settings:
+  max_length: 255
+  is_ascii: false
+  case_sensitive: false
+module: core
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

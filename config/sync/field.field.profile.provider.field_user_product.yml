@@ -1,0 +1,25 @@
+uuid: 351c1805-3842-4c98-9786-70642bdb7ac2
+langcode: es
+status: true
+dependencies:
+  config:
+    - field.storage.profile.field_user_product
+    - profile.type.provider
+id: profile.provider.field_user_product
+field_name: field_user_product
+entity_type: profile
+bundle: provider
+label: 'Seleccionar Seguros'
+description: ''
+required: true
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: views
+  handler_settings:
+    view:
+      view_name: show_products
+      display_name: entity_reference_1
+      arguments: {  }
+field_type: entity_reference

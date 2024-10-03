@@ -1,0 +1,8 @@
+uuid: 532d4480-9fe7-44d1-8664-c2c6db134e94
+langcode: es
+status: true
+dependencies: {  }
+id: administracion-aseguradora
+label: 'menu administrativo por rol'
+description: 'menu de navegacion aseguradora-operador-sponsor'
+locked: false

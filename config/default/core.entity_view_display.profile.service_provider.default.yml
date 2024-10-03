@@ -1,0 +1,59 @@
+uuid: 82f12991-3d98-4509-97a2-6b5428f6a528
+langcode: es
+status: true
+dependencies:
+  config:
+    - field.field.profile.service_provider.field_provider_address
+    - field.field.profile.service_provider.field_provider_first_name
+    - field.field.profile.service_provider.field_provider_id
+    - field.field.profile.service_provider.field_provider_last_name
+    - field.field.profile.service_provider.field_provider_phone_number
+    - profile.type.service_provider
+  module:
+    - address
+    - telephone
+id: profile.service_provider.default
+targetEntityType: profile
+bundle: service_provider
+mode: default
+content:
+  field_provider_address:
+    weight: 4
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    type: address_default
+    region: content
+  field_provider_first_name:
+    weight: 1
+    label: above
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    type: string
+    region: content
+  field_provider_id:
+    weight: 0
+    label: above
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    type: string
+    region: content
+  field_provider_last_name:
+    weight: 2
+    label: above
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    type: string
+    region: content
+  field_provider_phone_number:
+    weight: 3
+    label: above
+    settings:
+      title: ''
+    third_party_settings: {  }
+    type: telephone_link
+    region: content
+hidden: {  }

@@ -1,0 +1,132 @@
+uuid: 5e7a3e69-3d6a-4810-99e2-624d66c4beb4
+langcode: es
+status: true
+dependencies:
+  config:
+    - field.field.profile.operador.field_actividad_economica
+    - field.field.profile.operador.field_cedula
+    - field.field.profile.operador.field_correo_electronico
+    - field.field.profile.operador.field_correo_representante_legal
+    - field.field.profile.operador.field_direccion
+    - field.field.profile.operador.field_direccion_representante_le
+    - field.field.profile.operador.field_nombre
+    - field.field.profile.operador.field_nombre_representante_legal
+    - field.field.profile.operador.field_num_cedula_representante_l
+    - field.field.profile.operador.field_numero_telefono
+    - field.field.profile.operador.field_sponsor
+    - field.field.profile.operador.field_telefono_representante_leg
+    - field.field.profile.operador.field_tipo_de_cedula
+    - field.field.profile.operador.field_tipo_de_cedula_fisica
+    - profile.type.operador
+  module:
+    - address
+    - telephone
+id: profile.operador.default
+targetEntityType: profile
+bundle: operador
+mode: default
+content:
+  field_actividad_economica:
+    weight: 38
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: string_textfield
+    region: content
+  field_cedula:
+    weight: 39
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: string_textfield
+    region: content
+  field_correo_electronico:
+    weight: 37
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: email_default
+    region: content
+  field_correo_representante_legal:
+    weight: 33
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: string_textfield
+    region: content
+  field_direccion:
+    weight: 29
+    settings: {  }
+    third_party_settings: {  }
+    type: address_default
+    region: content
+  field_direccion_representante_le:
+    weight: 35
+    settings: {  }
+    third_party_settings: {  }
+    type: address_default
+    region: content
+  field_nombre:
+    weight: 27
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: string_textfield
+    region: content
+  field_nombre_representante_legal:
+    weight: 32
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: string_textfield
+    region: content
+  field_num_cedula_representante_l:
+    weight: 31
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: string_textfield
+    region: content
+  field_numero_telefono:
+    weight: 28
+    settings:
+      placeholder: ''
+    third_party_settings: {  }
+    type: telephone_default
+    region: content
+  field_sponsor:
+    weight: 40
+    settings:
+      match_operator: CONTAINS
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: entity_reference_autocomplete
+    region: content
+  field_telefono_representante_leg:
+    weight: 34
+    settings:
+      placeholder: ''
+    third_party_settings: {  }
+    type: telephone_default
+    region: content
+  field_tipo_de_cedula:
+    weight: 30
+    settings: {  }
+    third_party_settings: {  }
+    type: options_select
+    region: content
+  field_tipo_de_cedula_fisica:
+    weight: 36
+    settings: {  }
+    third_party_settings: {  }
+    type: options_select
+    region: content
+hidden: {  }

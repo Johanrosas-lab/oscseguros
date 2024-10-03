@@ -1,0 +1,21 @@
+uuid: e1fad72b-cdbd-4ee0-a7ba-c4ed72d408d7
+langcode: es
+status: true
+dependencies:
+  config:
+    - field.storage.profile.field_tipo_de_cedula_fisica
+    - profile.type.operador
+  module:
+    - options
+id: profile.operador.field_tipo_de_cedula_fisica
+field_name: field_tipo_de_cedula_fisica
+entity_type: profile
+bundle: operador
+label: 'Tipo de cedula fisica'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: list_string

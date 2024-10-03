@@ -1,0 +1,37 @@
+uuid: 8ecf459f-a544-41a7-b7fb-ae32d2ef0e72
+langcode: es
+status: true
+dependencies:
+  config:
+    - field.storage.profile.field_direccion_representante_le
+    - profile.type.operador
+  module:
+    - address
+id: profile.operador.field_direccion_representante_le
+field_name: field_direccion_representante_le
+entity_type: profile
+bundle: operador
+label: 'Direccion representante legal'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  available_countries: {  }
+  langcode_override: ''
+  field_overrides:
+    givenName:
+      override: hidden
+    additionalName:
+      override: hidden
+    familyName:
+      override: hidden
+    sortingCode:
+      override: hidden
+    dependentLocality:
+      override: hidden
+    administrativeArea:
+      override: hidden
+  fields: {  }
+field_type: address

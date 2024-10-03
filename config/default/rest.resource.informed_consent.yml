@@ -1,0 +1,19 @@
+uuid: e5618c7a-53ec-4101-ba29-47349f4f3be6
+langcode: es
+status: true
+dependencies:
+  module:
+    - osc_commerce_rest
+    - serialization
+    - simple_oauth
+id: informed_consent
+plugin_id: informed_consent
+granularity: resource
+configuration:
+  methods:
+    - GET
+    - POST
+  formats:
+    - json
+  authentication:
+    - oauth2

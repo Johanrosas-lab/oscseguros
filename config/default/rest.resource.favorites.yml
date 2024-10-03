@@ -1,0 +1,20 @@
+uuid: 2ac2916c-9296-47cc-94d0-995a8c7d79a1
+langcode: es
+status: true
+dependencies:
+  module:
+    - osc_commerce_rest
+    - serialization
+    - simple_oauth
+id: favorites
+plugin_id: favorites
+granularity: resource
+configuration:
+  methods:
+    - GET
+    - POST
+    - DELETE
+  formats:
+    - json
+  authentication:
+    - oauth2

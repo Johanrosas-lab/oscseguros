@@ -1,0 +1,19 @@
+uuid: 5dab00fd-b9a4-42c2-97dc-9bfe569aecb9
+langcode: es
+status: true
+dependencies:
+  config:
+    - field.storage.profile.field_cedula_sponsor
+    - profile.type.sponsor
+id: profile.sponsor.field_cedula_sponsor
+field_name: field_cedula_sponsor
+entity_type: profile
+bundle: sponsor
+label: Cedula
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

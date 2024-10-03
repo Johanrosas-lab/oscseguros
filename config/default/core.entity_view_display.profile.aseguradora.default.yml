@@ -1,0 +1,124 @@
+uuid: f228c76a-04d2-490b-a894-ddd2bca021bf
+langcode: es
+status: true
+dependencies:
+  config:
+    - field.field.profile.aseguradora.field_actividad_economica_aseg
+    - field.field.profile.aseguradora.field_cedula_aseguradora
+    - field.field.profile.aseguradora.field_correo_ele_rep_aseguradora
+    - field.field.profile.aseguradora.field_correo_electronico_
+    - field.field.profile.aseguradora.field_direccion_aseguradora
+    - field.field.profile.aseguradora.field_direccion_rep_aseg
+    - field.field.profile.aseguradora.field_nombre_aseguradora
+    - field.field.profile.aseguradora.field_nombre_rep_legal_aseg
+    - field.field.profile.aseguradora.field_numero_de_cedula_rep_asg
+    - field.field.profile.aseguradora.field_numero_telefono_aseg
+    - field.field.profile.aseguradora.field_numero_telefono_rep_aseg
+    - field.field.profile.aseguradora.field_tipo_de_cedula_aseg
+    - field.field.profile.aseguradora.field_tipo_de_cedula_fisica_aseg
+    - profile.type.aseguradora
+  module:
+    - address
+    - options
+id: profile.aseguradora.default
+targetEntityType: profile
+bundle: aseguradora
+mode: default
+content:
+  field_actividad_economica_aseg:
+    weight: 0
+    label: above
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    type: string
+    region: content
+  field_cedula_aseguradora:
+    weight: 1
+    label: above
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    type: string
+    region: content
+  field_correo_ele_rep_aseguradora:
+    weight: 3
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    type: basic_string
+    region: content
+  field_correo_electronico_:
+    weight: 2
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    type: basic_string
+    region: content
+  field_direccion_aseguradora:
+    weight: 4
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    type: address_default
+    region: content
+  field_direccion_rep_aseg:
+    weight: 5
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    type: address_default
+    region: content
+  field_nombre_aseguradora:
+    weight: 6
+    label: above
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    type: string
+    region: content
+  field_nombre_rep_legal_aseg:
+    weight: 13
+    label: above
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    type: string
+    region: content
+  field_numero_de_cedula_rep_asg:
+    weight: 8
+    label: above
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    type: string
+    region: content
+  field_numero_telefono_aseg:
+    weight: 9
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    type: basic_string
+    region: content
+  field_numero_telefono_rep_aseg:
+    weight: 10
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    type: basic_string
+    region: content
+  field_tipo_de_cedula_aseg:
+    weight: 11
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    type: list_default
+    region: content
+  field_tipo_de_cedula_fisica_aseg:
+    weight: 12
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    type: list_default
+    region: content
+hidden: {  }

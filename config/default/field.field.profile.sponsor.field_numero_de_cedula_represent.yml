@@ -1,0 +1,19 @@
+uuid: a4ecc9e8-e922-454b-bfdf-c8e778539f7e
+langcode: es
+status: true
+dependencies:
+  config:
+    - field.storage.profile.field_numero_de_cedula_represent
+    - profile.type.sponsor
+id: profile.sponsor.field_numero_de_cedula_represent
+field_name: field_numero_de_cedula_represent
+entity_type: profile
+bundle: sponsor
+label: 'Numero de cedula representante legal '
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

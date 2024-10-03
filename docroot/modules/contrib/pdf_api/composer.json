@@ -1,0 +1,8 @@
+{
+    "require": {
+        "mikehaertl/phpwkhtmltopdf": "~2.0",
+        "tecnickcom/tcpdf": "6.0.*",
+         "dompdf/dompdf" : "0.6.*",
+         "mpdf/mpdf" : "5.7.*"
+    }
+}

@@ -1,0 +1,21 @@
+uuid: a19d34cb-6664-46f5-a96c-538a3856f636
+langcode: es
+status: true
+dependencies:
+  config:
+    - field.storage.profile.field_telefono_representante_leg
+    - profile.type.operador
+  module:
+    - telephone
+id: profile.operador.field_telefono_representante_leg
+field_name: field_telefono_representante_leg
+entity_type: profile
+bundle: operador
+label: 'Numero Telefono representante legal'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: telephone

@@ -1,0 +1,19 @@
+uuid: 7b411019-c7d1-4a1b-8b0f-feee5ab63b11
+langcode: es
+status: true
+dependencies:
+  module:
+    - profile
+    - telephone
+id: profile.field_numero_telefono_sponsor
+field_name: field_numero_telefono_sponsor
+entity_type: profile
+type: telephone
+settings: {  }
+module: telephone
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

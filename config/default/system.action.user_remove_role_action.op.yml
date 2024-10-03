@@ -1,0 +1,14 @@
+uuid: 8124738b-daf3-43d2-b375-e8e2ddc29c92
+langcode: es
+status: true
+dependencies:
+  config:
+    - user.role.op
+  module:
+    - user
+id: user_remove_role_action.op
+label: 'Remove the Operador role from the selected user(s)'
+type: user
+plugin: user_remove_role_action
+configuration:
+  rid: op

@@ -1,0 +1,18 @@
+uuid: 3b05b643-3dd4-439b-84ba-559eba96bf7f
+langcode: es
+status: true
+dependencies:
+  theme:
+    - insurance_theme
+id: pagetitle
+theme: insurance_theme
+region: content_top
+weight: -15
+provider: null
+plugin: page_title_block
+settings:
+  id: page_title_block
+  label: 'Page title'
+  provider: core
+  label_display: '0'
+visibility: {  }

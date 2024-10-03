@@ -1,0 +1,19 @@
+uuid: 276c6ac0-dcb8-44ac-9ed5-526d059b281c
+langcode: es
+status: true
+dependencies:
+  module:
+    - address
+    - profile
+id: profile.field_direccion
+field_name: field_direccion
+entity_type: profile
+type: address
+settings: {  }
+module: address
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

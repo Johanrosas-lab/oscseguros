@@ -1,0 +1,21 @@
+uuid: 1d2b0414-16fb-45a8-89aa-c6cbc2c57f5c
+langcode: es
+status: true
+dependencies:
+  config:
+    - field.storage.profile.field_tipo_de_cedula
+    - profile.type.operador
+  module:
+    - options
+id: profile.operador.field_tipo_de_cedula
+field_name: field_tipo_de_cedula
+entity_type: profile
+bundle: operador
+label: 'Tipo de cedula'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: list_string

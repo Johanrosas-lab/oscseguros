@@ -1,0 +1,14 @@
+description: Supports Payment Reference Field's automated tests.
+# core: 8.x
+dependencies:
+  - payment_reference
+hidden: true
+name: Payment Reference Field tests
+package: Payment
+type: module
+
+# Information added by Drupal.org packaging script on 2018-01-30
+version: '8.x-2.0-rc4'
+core: '8.x'
+project: 'payment'
+datestamp: 1517316484

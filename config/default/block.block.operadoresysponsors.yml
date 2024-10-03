@@ -1,0 +1,30 @@
+uuid: 58e9332b-b64f-4d52-bfbe-6710050ab1e7
+langcode: es
+status: true
+dependencies:
+  config:
+    - system.menu.lista-operadores-sponsors
+  module:
+    - system
+  theme:
+    - insurance_theme
+id: operadoresysponsors
+theme: insurance_theme
+region: content
+weight: -16
+provider: null
+plugin: 'system_menu_block:lista-operadores-sponsors'
+settings:
+  id: 'system_menu_block:lista-operadores-sponsors'
+  label: 'operadores y sponsors'
+  provider: system
+  label_display: visible
+  level: 1
+  depth: 0
+  expand_all_items: false
+visibility:
+  request_path:
+    id: request_path
+    pages: "/sponsors-lista\r\n/operador-lista"
+    negate: false
+    context_mapping: {  }

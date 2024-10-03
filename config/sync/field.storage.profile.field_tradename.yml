@@ -1,0 +1,20 @@
+uuid: 82b33bf2-1993-481e-8076-7a25d39d7c14
+langcode: es
+status: true
+dependencies:
+  module:
+    - profile
+    - text
+id: profile.field_tradename
+field_name: field_tradename
+entity_type: profile
+type: text
+settings:
+  max_length: 255
+module: text
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

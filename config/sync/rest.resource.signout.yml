@@ -1,0 +1,20 @@
+uuid: a32cec60-e5e9-46b2-9c8d-48a3ff9f7bac
+langcode: es
+status: true
+dependencies:
+  module:
+    - basic_auth
+    - osc_commerce_rest
+    - serialization
+    - simple_oauth
+id: signout
+plugin_id: signout
+granularity: resource
+configuration:
+  methods:
+    - POST
+  formats:
+    - json
+  authentication:
+    - basic_auth
+    - oauth2

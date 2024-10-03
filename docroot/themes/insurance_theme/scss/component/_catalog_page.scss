@@ -1,0 +1,300 @@
+/* catalog page styles */
+.path-catalogo{
+  .home-page{
+    margin-top: 230px !important;
+    .region-content{
+      .form-group{
+        padding: 0 15px;
+        form{
+          padding-bottom: 0;
+          .form-item{
+            float: none;
+          }
+          .form-type-textfield{
+            padding-left: 0;
+            padding-bottom: 30px;
+            label{
+              font-size: 1px;
+              cursor: auto;
+              &:after{
+                font-size: 20px;
+                content: "\f002";
+                font-family: 'FontAwesome';
+                color: $color-secondary;
+              }
+            }
+            input{
+              border: none;
+              box-shadow: none;
+              border-bottom: 1px solid $color-border-gray;
+              border-radius: 0;
+              font-size: 16px;
+              letter-spacing: 0.5px;
+              &::-webkit-input-placeholder { /* Chrome/Opera/Safari */
+                color: $color-placeholder;
+                font-style: italic;
+                font-family: 'Roboto-Light';
+                font-weight: 100;
+                font-size: 15px;
+              }
+              &::-moz-placeholder { /* Firefox 19+ */
+                color: $color-placeholder;
+                font-style: italic;
+                font-family: 'Roboto-Light';
+                font-weight: 100;
+                font-size: 15px;
+              }
+              &:-ms-input-placeholder { /* IE 10+ */
+                color: $color-placeholder;
+                font-style: italic;
+                font-family: 'Roboto-Light';
+                font-weight: 100;
+                font-size: 15px;
+              }
+              &:-moz-placeholder { /* Firefox 18- */
+                color: $color-placeholder;
+                font-style: italic;
+                font-family: 'Roboto-Light';
+                font-weight: 100;
+                font-size: 15px;
+              }
+            }
+          }
+          details{
+            height: 84px;
+            padding: 5px 0;
+            -webkit-transition: all 0.25s ease-out;
+            -moz-transition: all 0.25s ease-out;
+            transition: all 0.25s ease-out;
+            summary{
+              width: fit-content;
+              font-size: 18px;
+              &:focus{
+                outline: 0 !important;
+              }
+              &::-webkit-details-marker{
+                display: none;
+              }
+              &:before{
+                content: "\f0b0";
+                font-family: 'FontAwesome';
+                font-size: 20px;
+                margin-right: 10px;
+                color: $color-secondary;
+              }
+              &:after{
+                display: inline-block;
+                content: "\f106";
+                font-family: 'FontAwesome';
+                font-size: 16px;
+                margin-left: 10px;
+                color: $color-secondary;
+                top: 3px;
+                position: relative;
+                -webkit-transition: all 0.25s ease-out;
+                -moz-transition: all 0.25s ease-out;
+                transition: all 0.25s ease-out;
+              }
+            }
+          }
+          details[open]{
+            -webkit-transition: all 0.25s ease-out;
+            -moz-transition: all 0.25s ease-out;
+            transition: all 0.25s ease-out;
+            summary{
+              &:after{
+                content: "\f106";
+                font-family: 'FontAwesome';
+                font-size: 16px;
+                margin-left: 10px;
+                color: $color-secondary;
+                top: 3px;
+                position: relative;
+                -webkit-transition: all 0.25s ease-out;
+                -moz-transition: all 0.25s ease-out;
+                transition: all 0.25s ease-out;
+                transform: rotate(180deg);
+              }
+            }
+            .form-radios{
+              margin-top: 15px;
+
+              .form-type-radio{
+                padding: 2px;
+                label{
+                  padding: 5px 13px;
+                  border: 1px solid $color-secondary;
+                  border-radius: 100px;
+                  color: $color-secondary;
+                  font-size: 13px;
+                  &:hover{
+                    color: $color-white;
+                    background-color: $color-secondary;
+                    box-shadow: 0 2px 4px rgba(0,0,0,0.50);
+                    -webkit-transition: all 0.2s ease-out;
+                    -moz-transition: all 0.2s ease-out;
+                    transition: all 0.2s ease-out;
+                  }
+                  input{
+                    display: none;
+                  }
+                }
+              }
+            }
+          }
+          .form-item-items-per-page{
+            padding: 5px 0;
+            label{
+              font-size: 18px;
+              margin-right: 10px;
+            }
+            .select-wrapper{
+              select{
+                border: none;
+                color: $color-secondary;
+                cursor: pointer !important;
+                box-shadow: 0 2px 9px 0 rgba(0,0,0,0.18);
+              }
+              &::after{
+                color: $color-secondary;
+                font-size: 10px;
+              }
+            }
+          }
+          .fieldgroup{
+            padding-bottom: 10px;
+            legend{
+              border: none;
+              font-size: 20px;
+            }
+          }
+        }
+      }
+      .view-content{
+        .table-responsive{
+          overflow-x: hidden !important;
+          .table{
+            border-collapse: inherit !important;
+          }
+          margin-top: 0px;
+          thead{
+            tr{
+              th{
+                font-size: 20px;
+                color: $color-secondary;
+                font-family: 'Roboto-Regular';
+                padding: 0 44px 35px 8px;
+                border-bottom: none;
+              }
+            }
+          }
+          tbody{
+            tr{
+              height: 70px !important;
+              background-color: $color-white !important;
+              &:hover{
+                transform: translateX(1px);
+                box-shadow: 0 2px 4px 0 rgba(0,0,0,0.18);
+                padding-left: 10px;
+              }
+              &:hover .views-field-title a{
+                color: $color-secondary;
+              }
+              .views-field-title{
+                padding-left: 20px;
+              }
+              td{
+                vertical-align: middle;
+                padding: 0;
+                font-family: 'Roboto-Light';
+                a{
+                  font-size: 16px;
+                  color: $color-black;
+                  text-decoration: none;
+                  font-family: 'Roboto-Light';
+                  display: inline;
+                  transition: all 0.2s ease-in-out;
+                  -moz-transition: all 0.2s ease-in-out;
+                  -webkit-transition: all 0.2s ease-in-out;
+                  &:hover{
+                    text-decoration: underline;
+                    color: $color-secondary;
+                  }
+                  img{
+
+                  }
+                }
+                .form-actions{
+                  padding-left: 0;
+                  button,
+                  #edit-submit{
+                    @include btn-third($padding: 5px 20px);
+                    border-color: $color-third;
+                    box-shadow: 0px 3px 4px 0 rgba(0, 0, 0, 0.34);
+                    margin-bottom: 19px;
+                    &:hover{
+                    background-color: $color-third-hover;
+                    border-color: $color-third-hover;
+                    }
+                  }
+                }
+              }
+              .views-field-title{
+                a{
+                  text-transform: lowercase;
+                  font-family: 'Roboto';
+                  color: $color-secondary;
+                  &::first-letter{
+                    text-transform: uppercase !important;
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+      .pager{
+        li{
+          a{
+            width: 100%;
+            padding: 10px 14px;
+            border-radius: 8px;
+            border: none;
+            background-color: #8f8f8f;
+            color: $color-white;
+            font-size: 16px;
+            letter-spacing: 1px;
+            &:hover{
+              background-color: $color-placeholder;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+// Not logged in Catalogo page header
+.not-logged-in.path-catalogo{
+  #main{
+    .home-page{
+      margin-top: 94px !important;
+      .region-content{
+        h1.page-header{
+          margin-bottom: 45px;
+          border: none;
+          padding: 35px 30px;
+          color: $color-white;
+          background: #0c3873;
+          background: -moz-linear-gradient(top, #0c3873 0%, #244b81 50%, #3c5f8f 100%);
+          background: -webkit-linear-gradient(top, #0c3873 0%,#244b81 50%,#3c5f8f 100%);
+          background: linear-gradient(to bottom, #0c3873 0%,#244b81 50%,#3c5f8f 100%);
+          filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#0c3873', endColorstr='#3c5f8f',GradientType=0 );
+        }
+        .views-element-container{
+
+        }
+      }
+    }
+  }
+}

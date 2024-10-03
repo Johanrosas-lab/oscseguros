@@ -1,0 +1,18 @@
+uuid: 129b45e5-c46c-4231-865b-bb28a1b80793
+langcode: es
+status: true
+dependencies: {  }
+id: provider
+label: Provider
+registration: false
+multiple: false
+roles:
+  authenticated: authenticated
+  provider: provider
+  administrator: '0'
+  service_provider: '0'
+  customer: '0'
+  channel_manager: '0'
+weight: 0
+use_revisions: false
+description: ''

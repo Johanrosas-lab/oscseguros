@@ -1,0 +1,37 @@
+uuid: 0716f3b5-d43a-4c98-93d2-dbc85751afb1
+langcode: es
+status: true
+dependencies:
+  config:
+    - system.menu.initial-menu
+  module:
+    - block_class
+    - system
+    - user
+  theme:
+    - insurance_theme
+third_party_settings:
+  block_class:
+    classes: visible-xs
+id: initialmenu_2
+theme: insurance_theme
+region: navigation_collapsible
+weight: -13
+provider: null
+plugin: 'system_menu_block:initial-menu'
+settings:
+  id: 'system_menu_block:initial-menu'
+  label: 'Initial Menu'
+  provider: system
+  label_display: '0'
+  level: 1
+  depth: 0
+  expand_all_items: false
+visibility:
+  user_role:
+    id: user_role
+    roles:
+      anonymous: anonymous
+    negate: false
+    context_mapping:
+      user: '@user.current_user_context:current_user'

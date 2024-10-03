@@ -1,0 +1,26 @@
+uuid: b2182170-b450-4e5c-a99a-aebbdd13122b
+langcode: es
+status: true
+dependencies:
+  module:
+    - klap_payment
+    - system
+  theme:
+    - insurance_theme
+id: showdefaultcards
+theme: insurance_theme
+region: highlight
+weight: 0
+provider: null
+plugin: klap_payment_default_card_block
+settings:
+  id: klap_payment_default_card_block
+  label: 'Show default cards'
+  provider: klap_payment
+  label_display: '0'
+visibility:
+  request_path:
+    id: request_path
+    pages: '/user/*'
+    negate: false
+    context_mapping: {  }

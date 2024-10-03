@@ -1,0 +1,16 @@
+uuid: 47cde309-b813-4a89-82c2-ee630fcf46e6
+langcode: es
+status: true
+dependencies: {  }
+id: perfil
+title: Perfil
+route_name: entity.node.canonical
+route_parameters:
+  node: f5cf6633-6815-49b3-962c-8b2f09b37b70
+options: {  }
+expanded: false
+menu_name: administracion-aseguradora
+enabled: false
+parent: ''
+weight: 0
+description: ''

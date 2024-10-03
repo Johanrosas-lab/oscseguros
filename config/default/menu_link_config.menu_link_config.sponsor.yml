@@ -1,0 +1,16 @@
+uuid: d192792d-411e-4f2e-a3ac-3ed5d5d9dd76
+langcode: es
+status: true
+dependencies: {  }
+id: sponsor
+title: Productos
+route_name: entity.node.canonical
+route_parameters:
+  node: f5cf6633-6815-49b3-962c-8b2f09b37b70
+options: {  }
+expanded: false
+menu_name: administracion-aseguradora
+enabled: true
+parent: ''
+weight: 0
+description: ''

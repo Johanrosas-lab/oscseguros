@@ -1,0 +1,21 @@
+uuid: 7d51e8d5-0a4a-4e6d-ab53-aad9ae2e4f45
+langcode: es
+status: true
+dependencies:
+  module:
+    - profile
+id: profile.field_cedula_sponsor
+field_name: field_cedula_sponsor
+entity_type: profile
+type: string
+settings:
+  max_length: 255
+  is_ascii: false
+  case_sensitive: false
+module: core
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

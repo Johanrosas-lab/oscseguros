@@ -1,0 +1,21 @@
+uuid: c8abd86d-3ac6-4bd7-b6be-ffa2e27c49c6
+langcode: es
+status: true
+dependencies:
+  module:
+    - commerce_product
+id: commerce_product.field_sugece_dollars
+field_name: field_sugece_dollars
+entity_type: commerce_product
+type: string
+settings:
+  max_length: 255
+  is_ascii: false
+  case_sensitive: false
+module: core
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

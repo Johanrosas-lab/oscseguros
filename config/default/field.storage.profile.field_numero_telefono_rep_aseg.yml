@@ -1,0 +1,19 @@
+uuid: 20a4ad18-f053-497f-a3c5-480d05cdaacd
+langcode: es
+status: true
+dependencies:
+  module:
+    - profile
+    - telephone
+id: profile.field_numero_telefono_rep_aseg
+field_name: field_numero_telefono_rep_aseg
+entity_type: profile
+type: telephone
+settings: {  }
+module: telephone
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

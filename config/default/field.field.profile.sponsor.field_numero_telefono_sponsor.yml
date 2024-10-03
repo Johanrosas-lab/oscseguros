@@ -1,0 +1,21 @@
+uuid: bb26cbab-03d1-483b-b4d4-a0f344fd2b1f
+langcode: es
+status: true
+dependencies:
+  config:
+    - field.storage.profile.field_numero_telefono_sponsor
+    - profile.type.sponsor
+  module:
+    - telephone
+id: profile.sponsor.field_numero_telefono_sponsor
+field_name: field_numero_telefono_sponsor
+entity_type: profile
+bundle: sponsor
+label: 'Numero telefono'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: telephone

@@ -1,0 +1,41 @@
+uuid: 144e78c1-cc80-47a2-ab58-8aba7be1cad9
+langcode: es
+status: true
+dependencies: {  }
+id: channel_manager
+label: 'Administrador de canal'
+weight: 5
+is_admin: null
+permissions:
+  - 'access commerce_product overview'
+  - 'access user profiles'
+  - 'administer users'
+  - 'cancel account'
+  - 'change own username'
+  - 'delete own attendants entities'
+  - 'delete own beneficiaries entities'
+  - 'delete own properties entities'
+  - 'delete own vehicles entities'
+  - 'flag favorites'
+  - 'flag informed_consent_acceptance'
+  - 'legal re-accept consentimiento_informado'
+  - 'legal view consentimiento_informado'
+  - 'manage own commerce_payment_method'
+  - 'restful get beneficiaries'
+  - 'restful get entity_legal'
+  - 'restful get entity_legal_check'
+  - 'restful get favorites'
+  - 'restful get informed_consent'
+  - 'restful get klap_payment'
+  - 'restful patch profiles'
+  - 'restful post beneficiaries'
+  - 'restful post signout'
+  - 'restful post user_cancel'
+  - 'unflag favorites'
+  - 'unflag informed_consent_acceptance'
+  - 'update own customer profile'
+  - 'view own attendants entities'
+  - 'view own beneficiaries entities'
+  - 'view own client profile'
+  - 'view own properties entities'
+  - 'view own vehicles entities'

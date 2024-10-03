@@ -1,0 +1,28 @@
+uuid: 7ca0918e-46a4-4a22-aff2-97551570b9a1
+langcode: es
+status: true
+dependencies:
+  config:
+    - commerce_product.commerce_product_type.seguro
+    - field.storage.commerce_product.field_categoria
+    - taxonomy.vocabulary.categories
+id: commerce_product.seguro.field_categoria
+field_name: field_categoria
+entity_type: commerce_product
+bundle: seguro
+label: Categoria
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:taxonomy_term'
+  handler_settings:
+    target_bundles:
+      categories: categories
+    sort:
+      field: _none
+    auto_create: false
+    auto_create_bundle: ''
+field_type: entity_reference

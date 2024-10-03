@@ -1,0 +1,21 @@
+uuid: bb38ca7b-8874-42e7-93f6-d5867a0dec04
+langcode: es
+status: true
+dependencies:
+  config:
+    - commerce_product.commerce_product_type.seguro
+    - field.storage.commerce_product.field_register_date
+  module:
+    - datetime
+id: commerce_product.seguro.field_register_date
+field_name: field_register_date
+entity_type: commerce_product
+bundle: seguro
+label: 'Fecha de Registro'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: datetime

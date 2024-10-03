@@ -1,0 +1,19 @@
+uuid: e2f7c28b-889d-4024-9dc6-a51122e0a2dc
+langcode: es
+status: true
+dependencies:
+  config:
+    - commerce_product.commerce_product_type.seguro
+    - field.storage.commerce_product.field_type_contract
+id: commerce_product.seguro.field_type_contract
+field_name: field_type_contract
+entity_type: commerce_product
+bundle: seguro
+label: 'Tipo de contrato'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

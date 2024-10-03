@@ -1,0 +1,21 @@
+uuid: a2bc6637-fef7-44a5-a28c-aa7e8e2279a8
+langcode: es
+status: true
+dependencies:
+  config:
+    - field.storage.profile.field_tipo_de_cedula_fisica_sp
+    - profile.type.sponsor
+  module:
+    - options
+id: profile.sponsor.field_tipo_de_cedula_fisica_sp
+field_name: field_tipo_de_cedula_fisica_sp
+entity_type: profile
+bundle: sponsor
+label: 'Tipo de cedula fisica'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: list_string

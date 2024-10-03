@@ -1,0 +1,8 @@
+uuid: 8710dcdd-21ca-4427-a5ec-b668da306ff6
+langcode: es
+status: true
+dependencies: {  }
+id: vertical-menu
+label: 'Vertical Menu'
+description: ''
+locked: false

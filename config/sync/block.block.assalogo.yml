@@ -1,0 +1,31 @@
+uuid: 3bcdea71-8022-4fab-9c8e-dd9e789727e9
+langcode: es
+status: true
+dependencies:
+  content:
+    - 'block_content:basic:81d32006-3aed-4d07-96d9-493e46899ad3'
+  module:
+    - block_content
+    - system
+  theme:
+    - insurance_theme
+id: assalogo
+theme: insurance_theme
+region: footer
+weight: 0
+provider: null
+plugin: 'block_content:81d32006-3aed-4d07-96d9-493e46899ad3'
+settings:
+  id: 'block_content:81d32006-3aed-4d07-96d9-493e46899ad3'
+  label: 'ASSA logo'
+  provider: block_content
+  label_display: '0'
+  status: true
+  info: ''
+  view_mode: full
+visibility:
+  request_path:
+    id: request_path
+    pages: '<front>'
+    negate: false
+    context_mapping: {  }

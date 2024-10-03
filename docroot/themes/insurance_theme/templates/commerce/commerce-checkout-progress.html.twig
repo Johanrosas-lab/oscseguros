@@ -1,0 +1,25 @@
+{#
+/**
+ * @file
+ * Default theme implementation for the checkout progress.
+ *
+ * Available variables:
+ * - steps: An array of steps, where each step has the following keys:
+ *   - id: The step ID.
+ *   - label: The step label.
+ *   - position: 'previous', 'current' or 'next'.
+ *
+ * @ingroup themeable
+ */
+#}
+<ol class="checkout-progress clearfix">
+  {% for step in steps %}
+      <li class="checkout-progress--step checkout-progress--step__{{ step.position }}">{{ step.label }}</li>
+  {% endfor %}
+</ol>
+<!-- <ol class="checkout-progress clearfix">
+  <li class="checkout-progress--step checkout-progress--step__1"><span>1</span>Resumen</li>
+  <li class="checkout-progress--step checkout-progress--step__2"><span>2</span>Formalización</li>
+  <li class="checkout-progress--step checkout-progress--step__3"><span>3</span>Pago</li>
+  <li class="checkout-progress--step checkout-progress--step__4"><span>4</span>Revisión</li>
+</ol> -->

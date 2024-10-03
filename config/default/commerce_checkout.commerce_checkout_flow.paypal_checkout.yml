@@ -1,0 +1,32 @@
+<<<<<<< HEAD
+uuid: a0fd9066-edec-4e05-be4b-e3571f957c1f
+langcode: es
+=======
+uuid: 35d9630b-ff7f-469e-8002-af5c80cd0ac3
+langcode: en
+>>>>>>> de07639e7... Update config
+status: true
+dependencies:
+  module:
+    - commerce_paypal
+    - email_registration
+    - klap_payment
+id: paypal_checkout
+label: 'PayPal Checkout'
+plugin: paypal_checkout
+configuration:
+  display_checkout_progress: true
+  panes:
+    review:
+      step: review
+      weight: '1'
+    completion_message:
+      step: complete
+      weight: '3'
+    order_summary:
+      view: ''
+      step: _sidebar
+      weight: '4'
+    paypal_checkout_payment_process:
+      step: payment
+      weight: '0'

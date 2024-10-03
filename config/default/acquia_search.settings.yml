@@ -1,0 +1,3 @@
+version: 8.x-1.16
+derived_key_salt: 21b083378ae5ed71f292fdbada9da340
+langcode: es

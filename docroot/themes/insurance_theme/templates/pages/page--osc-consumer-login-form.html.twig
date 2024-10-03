@@ -1,0 +1,12 @@
+<h1>Testing</h1>
+{% if error %}
+  <div>{{ error }}</div>
+{% else %}
+  <div>
+    {{ login_form }}
+  </div>
+  <div>
+    {{ 'Your digital agent'|t }}: {{ user_name }}
+  </div>
+{% endif %}
+

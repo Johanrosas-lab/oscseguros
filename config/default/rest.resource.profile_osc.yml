@@ -1,0 +1,18 @@
+uuid: 0217a233-8dc6-4020-876e-847170f19d3e
+langcode: es
+status: true
+dependencies:
+  module:
+    - osc_settings
+    - serialization
+    - simple_oauth
+id: profile_osc
+plugin_id: profile_osc
+granularity: resource
+configuration:
+  methods:
+    - GET
+  formats:
+    - json
+  authentication:
+    - oauth2

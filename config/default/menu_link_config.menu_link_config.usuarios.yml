@@ -1,0 +1,16 @@
+uuid: 2530ff6e-6da9-46a0-b651-73faac8b8a14
+langcode: es
+status: true
+dependencies: {  }
+id: usuarios
+title: Usuarios
+route_name: entity.node.canonical
+route_parameters:
+  node: f5cf6633-6815-49b3-962c-8b2f09b37b70
+options: {  }
+expanded: true
+menu_name: administracion-aseguradora
+enabled: true
+parent: ''
+weight: 0
+description: ''

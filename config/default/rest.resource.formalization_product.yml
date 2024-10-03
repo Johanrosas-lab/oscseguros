@@ -1,0 +1,19 @@
+uuid: 39074ecb-bf17-4442-b66b-0fd2f6d08830
+langcode: es
+status: true
+dependencies:
+  module:
+    - osc_commerce_rest
+    - serialization
+    - simple_oauth
+id: formalization_product
+plugin_id: formalization_product
+granularity: resource
+configuration:
+  methods:
+    - GET
+    - PATCH
+  formats:
+    - json
+  authentication:
+    - oauth2

@@ -1,0 +1,19 @@
+uuid: 353fe792-48f9-473f-9c3a-64ca509496d4
+langcode: es
+status: true
+dependencies:
+  module:
+    - osc_commerce_rest
+    - serialization
+    - simple_oauth
+id: ImageProfileUser
+plugin_id: ImageProfileUser
+granularity: resource
+configuration:
+  methods:
+    - GET
+    - POST
+  formats:
+    - json
+  authentication:
+    - oauth2

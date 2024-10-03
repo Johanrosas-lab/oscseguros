@@ -1,0 +1,26 @@
+uuid: 1b3f3a63-9850-4ce5-8ce0-7c5c582f6ad2
+langcode: es
+status: true
+dependencies:
+  module:
+    - osc_settings
+    - system
+  theme:
+    - insurance_theme
+id: poweredby
+theme: insurance_theme
+region: footer
+weight: 0
+provider: null
+plugin: powered_by_osc_block
+settings:
+  id: powered_by_osc_block
+  label: 'Powered By'
+  provider: osc_settings
+  label_display: '0'
+visibility:
+  request_path:
+    id: request_path
+    pages: "<front>\r\n"
+    negate: false
+    context_mapping: {  }

@@ -1,0 +1,70 @@
+uuid: c42f23d3-e15c-4971-843a-21053ac525f0
+langcode: es
+status: false
+dependencies:
+  config:
+    - field.storage.commerce_product.body
+    - field.storage.commerce_product.field_branch
+    - field.storage.commerce_product.field_categoria
+  module:
+    - search_api
+    - commerce_product
+id: sa
+name: 'Products Index'
+description: ''
+read_only: true
+field_settings:
+  title:
+    label: Title
+    datasource_id: 'entity:commerce_product'
+    property_path: title
+    type: text
+  body:
+    label: Body
+    datasource_id: 'entity:commerce_product'
+    property_path: body
+    type: text
+    dependencies:
+      config:
+        - field.storage.commerce_product.body
+  field_branch:
+    label: Ramo
+    datasource_id: 'entity:commerce_product'
+    property_path: field_branch
+    type: integer
+    dependencies:
+      config:
+        - field.storage.commerce_product.field_branch
+  field_categoria:
+    label: Categoria
+    datasource_id: 'entity:commerce_product'
+    property_path: field_categoria
+    type: text
+    dependencies:
+      config:
+        - field.storage.commerce_product.field_categoria
+  product_id:
+    label: ID
+    datasource_id: 'entity:commerce_product'
+    property_path: product_id
+    type: integer
+datasource_settings:
+  'entity:commerce_product':
+    bundles:
+      default: true
+      selected: {  }
+    languages:
+      default: true
+      selected: {  }
+processor_settings:
+  add_url: {  }
+  rendered_item: {  }
+  aggregated_field: {  }
+tracker_settings:
+  default:
+    indexing_order: fifo
+options:
+  index_directly: true
+  cron_limit: 50
+  overridden_by_acquia_search: 2
+server: null

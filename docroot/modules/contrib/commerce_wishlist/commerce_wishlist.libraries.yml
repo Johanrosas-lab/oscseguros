@@ -1,0 +1,12 @@
+commerce_wishlist_block:
+  version: VERSION
+  css:
+    layout:
+      css/commerce_wishlist_block.layout.css: {}
+    theme:
+      css/commerce_wishlist_block.theme.css: {}
+  js:
+    js/commerce_wishlist_block.js: {}
+  dependencies:
+    - core/jquery
+    - core/drupal

@@ -1,0 +1,14 @@
+uuid: 0e152199-f992-4024-8ba3-8a988c6db23e
+langcode: es
+status: true
+dependencies:
+  config:
+    - user.role.channel_manager
+  module:
+    - user
+id: user_remove_role_action.channel_manager
+label: 'Remove the Administrador de canal role from the selected user(s)'
+type: user
+plugin: user_remove_role_action
+configuration:
+  rid: channel_manager

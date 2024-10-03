@@ -1,0 +1,29 @@
+uuid: 77a7626d-a212-4eca-b81d-cb368a3a481b
+langcode: es
+status: true
+dependencies:
+  config:
+    - field.storage.profile.field_categoria
+    - profile.type.provider
+    - taxonomy.vocabulary.provider_category
+id: profile.provider.field_categoria
+field_name: field_categoria
+entity_type: profile
+bundle: provider
+label: Categoría
+description: ''
+required: true
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:taxonomy_term'
+  handler_settings:
+    target_bundles:
+      provider_category: provider_category
+    sort:
+      field: name
+      direction: asc
+    auto_create: false
+    auto_create_bundle: ''
+field_type: entity_reference

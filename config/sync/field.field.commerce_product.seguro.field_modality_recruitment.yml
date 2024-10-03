@@ -1,0 +1,28 @@
+uuid: 94455edc-4109-4dc3-a922-d2e434643bfc
+langcode: es
+status: true
+dependencies:
+  config:
+    - commerce_product.commerce_product_type.seguro
+    - field.storage.commerce_product.field_modality_recruitment
+    - taxonomy.vocabulary.modality_recruitment
+id: commerce_product.seguro.field_modality_recruitment
+field_name: field_modality_recruitment
+entity_type: commerce_product
+bundle: seguro
+label: 'Modalidad Contratacion'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:taxonomy_term'
+  handler_settings:
+    target_bundles:
+      modality_recruitment: modality_recruitment
+    sort:
+      field: _none
+    auto_create: false
+    auto_create_bundle: ''
+field_type: entity_reference

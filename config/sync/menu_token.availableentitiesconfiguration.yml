@@ -1,0 +1,31 @@
+available_entities:
+  node: node
+  profile: profile
+  user: user
+  block_content: 0
+  comment: 0
+  commerce_log: 0
+  commerce_order: 0
+  commerce_order_item: 0
+  commerce_payment_method: 0
+  commerce_payment: 0
+  commerce_product_variation: 0
+  commerce_product: 0
+  commerce_product_attribute_value: 0
+  commerce_store: 0
+  consumer: 0
+  contact_message: 0
+  file: 0
+  flagging: 0
+  search_api_task: 0
+  shortcut: 0
+  oauth2_token: 0
+  taxonomy_term: 0
+  menu_link_content: 0
+  attendants: 0
+  beneficiaries: 0
+  properties: 0
+  vehicles: 0
+_core:
+  default_config_hash: w4lg2w4ee2Ig5VjqsctKuiSFEuhYXm2KaAMk6Qg1ZxM
+langcode: es

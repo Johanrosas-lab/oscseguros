@@ -1,0 +1,20 @@
+uuid: b68022cf-8bea-4a16-82e4-826d7e5a83b3
+langcode: es
+status: true
+dependencies: {  }
+id: aseguradora
+label: Aseguradora
+multiple: false
+registration: false
+roles:
+  administrator: '0'
+  service_provider: '0'
+  customer: '0'
+  channel_manager: '0'
+  provider: '0'
+  authenticated: '0'
+  aseguradora: '0'
+  op: '0'
+  sponsor: '0'
+allow_revisions: false
+new_revision: false

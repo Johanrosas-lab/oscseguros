@@ -1,0 +1,21 @@
+uuid: 58d24c64-a11e-4c44-8aca-78fa8a4060ab
+langcode: es
+status: true
+dependencies:
+  config:
+    - field.storage.profile.field_numero_telefono
+    - profile.type.operador
+  module:
+    - telephone
+id: profile.operador.field_numero_telefono
+field_name: field_numero_telefono
+entity_type: profile
+bundle: operador
+label: 'Numero telefono'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: telephone

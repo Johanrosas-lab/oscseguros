@@ -1,0 +1,19 @@
+uuid: 3c61334d-fc5c-4788-8efa-6d7a4c310f9c
+langcode: es
+status: true
+dependencies:
+  module:
+    - user
+id: user.field_digital_agent_list
+field_name: field_digital_agent_list
+entity_type: user
+type: entity_reference
+settings:
+  target_type: user
+module: core
+locked: false
+cardinality: -1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

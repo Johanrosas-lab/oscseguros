@@ -1,0 +1,14 @@
+name: Printable PDF
+type: module
+description: 'Provides a printable format for generating PDFs.'
+package: Printable
+# core: 8.x
+dependencies:
+  - printable
+  - pdf_api
+
+# Information added by Drupal.org packaging script on 2017-09-25
+version: '8.x-1.0'
+core: '8.x'
+project: 'printable'
+datestamp: 1506376747

@@ -1,0 +1,192 @@
+uuid: 28eca158-d818-4b77-b4c0-e26caefaa5c6
+langcode: es
+status: true
+dependencies:
+  config:
+    - field.storage.commerce_product.field_categoria
+    - field.storage.commerce_product.body
+    - field.storage.commerce_product.field_product_image
+    - field.storage.commerce_product.variations
+    - field.storage.commerce_product.field_insurance_request
+    - field.storage.commerce_product.field_type_contract
+    - field.storage.commerce_product.field_branch
+    - search_api.server.acquia_search_server
+  module:
+    - search_api
+    - flag
+    - commerce_product
+    - commerce_store
+id: products
+name: Products
+description: ''
+read_only: false
+field_settings:
+  flag_id:
+    label: Flagging
+    datasource_id: 'entity:flagging'
+    property_path: flag_id
+    type: string
+  flagged_entity:
+    label: Entity
+    datasource_id: 'entity:flagging'
+    property_path: flagged_entity
+    type: integer
+  flagged_entity_1:
+    label: Entity
+    datasource_id: 'entity:flagging'
+    property_path: flagged_entity
+    type: integer
+  entity_id:
+    label: 'ID de entidad'
+    datasource_id: 'entity:flagging'
+    property_path: entity_id
+    type: string
+  entity_id_1:
+    label: 'ID de entidad'
+    datasource_id: 'entity:flagging'
+    property_path: entity_id
+    type: string
+  field_categoria:
+    label: Categoria
+    datasource_id: 'entity:commerce_product'
+    property_path: field_categoria
+    type: integer
+    dependencies:
+      config:
+        - field.storage.commerce_product.field_categoria
+  body:
+    label: Body
+    datasource_id: 'entity:commerce_product'
+    property_path: body
+    type: text
+    dependencies:
+      config:
+        - field.storage.commerce_product.body
+  product_id:
+    label: ID
+    datasource_id: 'entity:commerce_product'
+    property_path: product_id
+    type: integer
+  title:
+    label: Título
+    datasource_id: 'entity:commerce_product'
+    property_path: title
+    type: text
+  field_product_image:
+    label: Image
+    datasource_id: 'entity:commerce_product'
+    property_path: field_product_image
+    type: integer
+    dependencies:
+      config:
+        - field.storage.commerce_product.field_product_image
+  type:
+    label: 'Product type'
+    datasource_id: 'entity:commerce_product'
+    property_path: type
+    type: string
+  variations:
+    label: Variations
+    datasource_id: 'entity:commerce_product'
+    property_path: variations
+    type: integer
+    dependencies:
+      config:
+        - field.storage.commerce_product.variations
+  field_insurance_request:
+    label: 'Solicitud de Seguro'
+    datasource_id: 'entity:commerce_product'
+    property_path: field_insurance_request
+    type: integer
+    dependencies:
+      config:
+        - field.storage.commerce_product.field_insurance_request
+  field_type_contract:
+    label: 'Tipo de contrato'
+    datasource_id: 'entity:commerce_product'
+    property_path: field_type_contract
+    type: integer
+    dependencies:
+      config:
+        - field.storage.commerce_product.field_type_contract
+  field_branch:
+    label: Ramo
+    datasource_id: 'entity:commerce_product'
+    property_path: field_branch
+    type: integer
+    dependencies:
+      config:
+        - field.storage.commerce_product.field_branch
+  field_branch_1:
+    label: Ramo
+    datasource_id: 'entity:commerce_product'
+    property_path: field_branch
+    type: integer
+    dependencies:
+      config:
+        - field.storage.commerce_product.field_branch
+  field_insurance_request_1:
+    label: 'Solicitud de Seguro'
+    datasource_id: 'entity:commerce_product'
+    property_path: field_insurance_request
+    type: integer
+    dependencies:
+      config:
+        - field.storage.commerce_product.field_insurance_request
+  field_type_contract_1:
+    label: 'Tipo de contrato'
+    datasource_id: 'entity:commerce_product'
+    property_path: field_type_contract
+    type: string
+    dependencies:
+      config:
+        - field.storage.commerce_product.field_type_contract
+  name:
+    label: Name
+    datasource_id: 'entity:commerce_store'
+    property_path: name
+    type: string
+datasource_settings:
+  'entity:flagging':
+    bundles:
+      default: true
+      selected: {  }
+  'entity:commerce_product':
+    bundles:
+      default: true
+      selected: {  }
+    languages:
+      default: true
+      selected: {  }
+  'entity:commerce_product_attribute_value':
+    bundles:
+      default: true
+      selected: {  }
+    languages:
+      default: true
+      selected: {  }
+  'entity:commerce_product_variation':
+    bundles:
+      default: true
+      selected: {  }
+    languages:
+      default: true
+      selected: {  }
+  'entity:commerce_store':
+    bundles:
+      default: true
+      selected: {  }
+    languages:
+      default: true
+      selected: {  }
+processor_settings:
+  add_url: {  }
+  rendered_item: {  }
+  aggregated_field: {  }
+tracker_settings:
+  default:
+    indexing_order: fifo
+options:
+  index_directly: true
+  cron_limit: 50
+server: acquia_search_server

@@ -1,0 +1,19 @@
+uuid: f327d37f-09b3-484d-a591-cd6dac914e36
+langcode: es
+status: true
+dependencies:
+  config:
+    - field.storage.profile.field_nombre_rep_legal_aseg
+    - profile.type.aseguradora
+id: profile.aseguradora.field_nombre_rep_legal_aseg
+field_name: field_nombre_rep_legal_aseg
+entity_type: profile
+bundle: aseguradora
+label: 'Nombre representante legal'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

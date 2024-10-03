@@ -1,0 +1,45 @@
+uuid: b00d0559-15c5-4bbc-bae7-c6581b65b2ab
+langcode: es
+status: true
+dependencies:
+  module:
+    - commerce_payment
+    - klap_payment
+id: default
+label: Default
+plugin: multistep_default
+configuration:
+  display_checkout_progress: true
+  panes:
+    contact_information:
+      double_entry: false
+      step: _disabled
+      weight: 7
+    login:
+      allow_guest_checkout: true
+      allow_registration: false
+      step: login
+      weight: 0
+    order_summary:
+      view: ''
+      step: _disabled
+      weight: 8
+    completion_message:
+      step: complete
+      weight: 4
+    review:
+      step: review
+      weight: 2
+    payment_process:
+      capture: true
+      step: _disabled
+      weight: 6
+    payment_information:
+      step: _disabled
+      weight: 5
+    review_product:
+      step: payment
+      weight: 3
+    formalization_product:
+      step: order_information
+      weight: 1

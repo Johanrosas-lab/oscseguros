@@ -1,0 +1,19 @@
+uuid: afdc1180-057a-4b1d-b17a-6bff60185f6a
+langcode: es
+status: true
+dependencies:
+  config:
+    - field.storage.profile.field_actividad_economica_aseg
+    - profile.type.aseguradora
+id: profile.aseguradora.field_actividad_economica_aseg
+field_name: field_actividad_economica_aseg
+entity_type: profile
+bundle: aseguradora
+label: 'Actividad economica'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

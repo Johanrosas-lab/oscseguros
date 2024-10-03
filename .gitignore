@@ -1,0 +1,13 @@
+# Ignore paths that contain user-generated content.
+docroot/files
+docroot/sites/*/files
+docroot/sites/*/private
+.DS_Store
+config/.DS_Store
+/.DS_Store
+.idea/
+docroot/themes/insurance_theme/node_modules
+docroot/sites/default/settings.local.php
+#docroot/sites/default/development.services.yml
+node_modules
+docroot/.lando.yml

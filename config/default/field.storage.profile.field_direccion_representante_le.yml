@@ -1,0 +1,19 @@
+uuid: bb1e2b69-817e-47be-9b3a-5781e19e63c4
+langcode: es
+status: true
+dependencies:
+  module:
+    - address
+    - profile
+id: profile.field_direccion_representante_le
+field_name: field_direccion_representante_le
+entity_type: profile
+type: address
+settings: {  }
+module: address
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

@@ -1,0 +1,18 @@
+uuid: 9099449d-f8d9-4d75-b58a-821008c271a2
+langcode: es
+status: true
+dependencies:
+  module:
+    - osc_commerce_rest
+    - serialization
+    - simple_oauth
+id: order_custom
+plugin_id: order_custom
+granularity: resource
+configuration:
+  methods:
+    - PATCH
+  formats:
+    - json
+  authentication:
+    - oauth2

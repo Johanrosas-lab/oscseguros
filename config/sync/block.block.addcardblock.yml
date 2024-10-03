@@ -1,0 +1,26 @@
+uuid: 388d9526-ac2b-4336-bcf4-f0edd3ee5a38
+langcode: es
+status: true
+dependencies:
+  module:
+    - klap_payment
+    - system
+  theme:
+    - insurance_theme
+id: addcardblock
+theme: insurance_theme
+region: content
+weight: 0
+provider: null
+plugin: klap_add_card_block
+settings:
+  id: klap_add_card_block
+  label: 'Add card block'
+  provider: klap_payment
+  label_display: '0'
+visibility:
+  request_path:
+    id: request_path
+    pages: "/payment-methods/list\r\n/checkout/*/review"
+    negate: false
+    context_mapping: {  }

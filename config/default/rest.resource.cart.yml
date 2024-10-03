@@ -1,0 +1,20 @@
+uuid: c2148482-d7d4-4861-9b00-eb07e88dae93
+langcode: es
+status: true
+dependencies:
+  module:
+    - osc_commerce_rest
+    - serialization
+    - simple_oauth
+id: cart
+plugin_id: cart
+granularity: resource
+configuration:
+  methods:
+    - POST
+    - DELETE
+    - PATCH
+  formats:
+    - json
+  authentication:
+    - oauth2
